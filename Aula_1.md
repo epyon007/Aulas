@@ -58,7 +58,7 @@ tiago ALL=(ALL:ALL) NOPASSWD: ALL
 
 
 
-#### Aula 1.2 Documentação e Filtros
+
 
 Listagem de arquivos
 
@@ -229,12 +229,133 @@ Para realizar a criação de um link físico, basta utilizar o comando 'ln' sem 
 
 ln [caminho arquivo original] [caminho hardlink]
 
-
+Exemplo prático para criação de hardlink para o arquivo '/etc/hosts'.
 
 ```bash
-~
+~ ln /etc/hosts /home/tiago/link_fisico
 ```
 
+#### Aula 1.2 Documentação e Filtros
+
+É muito comum ter alguma dúvida com relação a comandos a serem utilizados no shell, especialmente quando não se está acostumado a executar alguns comandos específicos.
+
+Para isso, podemos utilizar algumas ferramentas de apoio fornecidas pelo sistema.
+
+Um exemplo disso é o comando 'man', que exibe manuais de comandos do sistema.
+
+No comando a seguir, exibiremos um manual do comando 'ls', onde é exibida uma descrição da função do comando, bem como suas opções correspondentes, além de outras informações.
+
+```bash
+~ man ls
+```
+
+Podemos também consultar uma descrição resumida relacionada a um comando especifico,
+
+```bash
+~ man -k vim
+```
+
+Para atualizar a base de dados de manuais, é necessário utilizar o comando mandb. Ele atualiza o banco de dados relacionado aos manuais de comandos do sistema
+
+```bash
+~ mandb
+```
+
+Além do comando 'man', temos também como ferramenta de apoio o comando 'help', que também exibe descrição sobre a função do comando consultado, bem como suas respectivas opções.
+
+```bash
+~ help
+~ help unset
+```
+
+Existem também um comando que possui a mesma função do **'man -k [comando]'**, o comando 'apropos'.
+
+```bash
+apropos unset
+```
+
+Além destas ferramentas já citadas, podemos utilizar também a opção **--help** nos comandos que utilizarmos.
+
+```bash
+~ passwd --help
+~ vim --help
+```
+
+##### Redirecionamento
+
+<!Checar conhecimento dos alunos sobre dispositivos de entrada e saída>
+
+<!Realizar o desenho exemplificando entrada e saída padrão>
+
+Ao utilizar qualquer computador, nós precisamos de alguns dispositivos que permitam esta interação com o computador, são os chamados 'Dispositivos de entrada e saída'.
+
+Enquanto trabalhamos, estes dispositivos e enviam e recebem sinais, sendo as entradas enviadas por meio de mouse ou teclado e as saídas recebidas em monitores ou impressoras.
+
+Fundamentalmente, existem 3 tipos de sinais:
+
+- stdin (Standard Input) - Entrada de dados a serem processados pelo computador, utilizando mouse, teclado, scanner, etc. Dentro do shell, o dispositivo de entrada padrão é o teclado;
+
+- stdout (Standard Output) - Informações de saída que são resultado de processamentos de comandos enviados a partir da entrada padrão, a saída pode ser vista a partir de monitores, impressoras, etc;
+
+- stderr (Standard Error) - Informações de saída de erros que são resultado de processamentos enviados a partir da entrada padrão. Assim como no **stdout**, seu destino também é o monitor, mas este erro padrão também pode ser redirecionado para um arquivo, se necessário.
+
+Conhecendo este conceito, podemos agora falar sobre redirecionadores, que servem para nos auxiliar na manipulação de entradas e saídas dentro de sistemas Linux.
+
+Vamos começar com um exemplo prático:
+
+```bash
+~ ls /etc/*.conf > /tmp/lista.txt
+```
+No comando acima, nós listamos todos os arquivos que estão no diretório **/etc** e que terminam com os caracteres **.conf**, após a realização do comando todos os dados processados pelo computador foram inseridos no arquivo **/tmp/lista.txt**.
+
+Ao utilizar o redirecionador **'>'**, toda a saída do comando sobrescreverá o arquivo para o qual ela foi enviada, não preservando dados que já estavam naquele arquivo.
+
+Caso o administrador não queira que os dados anteriores sejam sobrescritos, ele deverá utilizar um redirecionador diferente, o **'>>'**. Ao utilizar **'>>'**, a saída do comando será adicionada ao final do arquivo, logo após os dados que já estavam salvos.
+
+```bash
+~ ls /var/log/*.log >> /tmp/lista.txt
+~ cat /etc/passwd | wc -l
+```
+O caractere PIPE ( **'|'** ), serve para redirecionarmos a saída de um comando como entrada de outro.
+
+Por exemplo, abaixo podemos utilizar o comando 'cat' no arquivo **/etc/passwd** e contar quantas linhas o arquivo possui com o comando **wc** e a opção **-l**, apenas em uma linha de comando.
+
+```bash
+~ cat /etc/passwd | wc -l
+```
+
+```bash
+cat /etc/passwd | tr [:lower:] [:upper:]
+cat /etc/passwd | tr [a-z] [A-Z]
+```
+
+```bash
+cut -d : -f 1 /etc/passwd
+cut -d : -f 1 /etc/passwd | sort | tr [:lower:] [:upper:]
+```
+
+```bash
+awk -F : '{print $1}' /etc/passwd
+```
+
+```bash
+
+```
+```bash
+
+```
+```bash
+
+```
+```bash
+
+```
+```bash
+
+```
+```bash
+
+```
 #### Aula 1.3 Localizar arquivos e expressões regulares
 
 
