@@ -324,38 +324,77 @@ Por exemplo, abaixo podemos utilizar o comando 'cat' no arquivo **/etc/passwd** 
 ~ cat /etc/passwd | wc -l
 ```
 
+Nos comandos anteriores, nós redirecionamos para os arquivos tanto a saída padrão (stdout) quanto a saída de erro (stderr), mas nós podemos separar a natureza destas saídas, mantendo saídas de erro em um arquivo e mantendo a saída padrão direto em uma tela. Para isso basta utilizarmos o redirecionador **2>**.
+
+```bash
+~ ls -R /proc/ 2> /tmp/erros
+~ cat /tmp/erros
+```
+
+Podemos também, redirecionar todas as saídas para arquivos diferentes, sendo um arquivo armazenando a saída padrão e outro sendo a saída de erro, nesse caso utilizamos os dois redirecionadores dentro de uma mesma linha de comando, o **1>** (ou apenas **>**) encaminha a saída padrão para o arquivo **/tmp/arquivos** e o **2>** redirecionará a saída para o arquivo **/tmp/erros**.
+
+```bash
+~ ls -R /proc/ 1> /tmp/arquivos 2> /tmp/erros
+~ cat /tmp/arquivos
+~ cat /tmp/erros
+```
+Outra possibilidade é encaminhar a saída e o erro padrão para um mesmo arquivo, utilizando o exemplo abaixo:
+
+```bash
+~ ls -R /proc 1> /tmp/arquivos 2>&1
+~ cat /tmp/arquivos
+```
+
+
+
+```bash
+~ head /etc/services
+~ head -n 3 /etc/services
+```
+
+#### Opções úteis do comando head
+
+
+```bash
+~ tail /etc/services
+~ tail -n 3 /etc/services
+```
+
+#### Opções úteis do comando tail
+
+```bash
+~ sort /etc/passwd
+```
+
+Ainda utilizando o PIPE (**'|'**), vamos utilizar como exemplo estes encadeamento de comandos para trocar os caracteres do arquivo **/etc/passwd** para caixa alta.
+
 ```bash
 cat /etc/passwd | tr [:lower:] [:upper:]
 cat /etc/passwd | tr [a-z] [A-Z]
 ```
+
+Na sequência a seguir, coletaremos os dados do primeiro campo do arquivo **/etc/passwd** e os exibiremos na saída padrão.
+No comando seguinte, utilizaremos o comando **sort** para ordenar a saída do comando anterior em ordem alfabética e em seguida substituir as letras minúsculas por letras maiúsculas.
 
 ```bash
 cut -d : -f 1 /etc/passwd
 cut -d : -f 1 /etc/passwd | sort | tr [:lower:] [:upper:]
 ```
 
+#### Comando **cut**
+Serve para mostrar seções de cada linha do arquivo, por padrão utiliza tabulações como delimitador de campo. Utilizando a opção **-d** realiza a consulta no arquivo utilizando caracteres como delimitadores, como o caractere **':'**. A opção **-f**, define qual campo se quer exibir, no caso do comando acima, foi utilizado o número 1, indicando o primeiro campo de cada linha.
+
+#### Comando **tr**
+Utilizado para apagar ou substituir caracteres durante a realização de filtros, como os aplicados no exemplo. No comando as opções [:lower:] e [:upper:], indicam que a saída a ser exibida é a substituição de letras minúsculas por letras
+
+#### Comando **awk**
+Outra forma de realizar este mesmo filtro baseando-se nos campos do arquivo, é utilizando o comando **awk**. A opção **-F** define um delimitador a ser considerado dentro do arquivo, no caso o caractere **':'**. A entrada **'{print $1}'**, indica o primeiro campo de cada linha do arquivo podendo ser editado para exibir outros campos **{print $2}, {print $3},** etc.
+
 ```bash
 awk -F : '{print $1}' /etc/passwd
 ```
 
-```bash
 
-```
-```bash
-
-```
-```bash
-
-```
-```bash
-
-```
-```bash
-
-```
-```bash
-
-```
 #### Aula 1.3 Localizar arquivos e expressões regulares
 
 
