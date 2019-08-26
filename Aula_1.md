@@ -32,7 +32,7 @@ Afinal, no cotidiano precisamos realizar atividades simples como navegar entre d
 ~ uname - exibe algumas informações relacionadas ao sistema e seu kernel.
 
 Linux     benihime  5.0.0-23-generic  #24~18.04.1-Ubuntu SMP Mon Jul 29 16:12:28 UTC 2019   x86_64 x86_64 x86_64                         GNU/Linux
-[kenrel] [nodename] [kernel-release]          [kernel-version]                              [machine - processor - hardware platform]   [SO]
+[kernel] [nodename] [kernel-release]          [kernel-version]                              [machine - processor - hardware platform]   [SO]
 
   uname -a   /- exibe todas as informações (omite processador e plataforma se forem desconhecidos)
   uname -r   /- exibe a versão do lançamento do kernel
@@ -45,9 +45,18 @@ As vezes precisamos executar comandos que exigem permissões que usuários comun
 
 Para checar os usuários que estão configurados para executar o sudo, é necessário acessarmos o arquivo */etc/sudoers*
 
-ex de entrada: tiago ALL=(ALL:ALL) ALL
+Exemplo de entrada:
 
-## verificar configuração da minha maquina de casa para sudo nao exigir senha.
+```shell
+tiago ALL=(ALL:ALL) ALL
+```
+
+ex de entrada para suprimir senha:
+```shell
+tiago ALL=(ALL:ALL) NOPASSWD: ALL
+```
+
+
 
 #### Aula 1.2 Documentação e Filtros
 
@@ -105,10 +114,13 @@ Para realizarmos a criação de diretórios, utilizamos o comando **mkdir**:
 
 Para listar os arquivos e diretórios em formato de árvore, nós temos o comando tree. Ele exibe de forma hierárquica a estrutura de diretórios.
 
+```bash
 ~ tree /tmp/backup
+```
 
-  tree -a [path]   /- lista todos os arquivos
-  tree -d [path]   /- lista apenas diretórios
+
+######  tree -a [path]   /- lista todos os arquivos
+######  tree -d [path]   /- lista apenas diretórios
 
 
 ~ mkdir -m 777 arquivo1   /- cria o arquivo com as permissões préviamente definidas
@@ -121,9 +133,111 @@ Para listar os arquivos e diretórios em formato de árvore, nós temos o comand
 ~ stat arquivo1
 ~ stat arquivo2
 
-No dia a dia é bastante comum movermos, copiar ou renomear arquivos e diretórios, para realizar essas ações, utilizamos coman
+No dia a dia é bastante comum movermos, copiar ou renomear arquivos e diretórios, para realizar essas ações é necessário conhecer os comandos corretos de forma a facilitar o trabalho.
+
+Para copiar arquivos e diretórios, utilizamos o comando 'cp':
+``` bash
+~ cp /etc/hosts /tmp
+```
+
+<!Usar o 'cat' para exibir o conteúdo do arquivo para mostrar aos alunos que o arquivo foi realmente copiado>
+
+#### Opções úteis
+
+```bash
+cp -p [origem] [destino] # Preserva os atributos dos arquivos como modo, dono do arquivo, horarios de acesso e/ou modificação etc.
+
+cp -r ou -R [origem] [destino] # Copia diretórios recursivamente
+
+cp -v [origem] [destino] # Exibe o status de progresso da cópia, listando os arquivos que estão sendo copiados naquele momento.
+
+cp -i /etc/hosts /tmp # O -i é um parâmetro de interatividade, onde o sistema pergunta para se você realmente deseja realizar a operação.
+```
+
+Para renomear e mover arquivos, utilizamos o 'mv':
+
+```bash
+~ mv /tmp/hosts .
+~ mv hosts /tmp/servers
+```
+
+#### Opções úteis
+
+```bash
+~ mv -f [origem] [destino] # Não pergunta ao usuário antes de sobrescrever um arquivo.
+~ mv -i [origem] [destino] # Pergunta ao usuário antes de sobrescrever um arquivo.
+~ mv -n [origem] [destino] # Não sobrescreve um arquivo existente.
+~ mv -v [origem] [destino] # Exibe o status de progresso da movimentação de arquivos, listando o que está sendo movido naquele momento.
+```
+
+Para realizar a remoção de arquivos, utilizamos o comando 'rm'. Para remover diretórios, utilizamos o 'rmdir'.
+
+Antes de realizar a remoção, vamos fazer um backup do arquivo que vamos remover:
+
+```bash
+~ mkdir /tmp/confs
+~ cp /etc/*.conf /tmp/confs
+```
+
+Agora que fizemos a cópia, vamos remover os arquivos e diretórios utilizando os comandos 'rm' e 'rmdir', respectivamente:
+
+##### Importante: O comando 'rmdir' remove apenas diretórios vazios
+
+```bash
+~ rm /tmp/confs/*.conf
+~ rmdir /tmp/confs
+```
+Obs:
+
+#### Opções úteis do comando 'rm'
+
+```bash
+~ rm -f [arquivo] # Força a remoção de arquivos, ignorando arquivos inexistentes.
+~ rm -i [arquivo] # Questiona o usuário antes e realizar a remoção dos arquivos.
+~ rm -r [arquivo] # Remove diretórios e seus conteúdos recursivamente.
+~ rm -v [arquivo] # Exibe o status de progresso da remoção dos arquivos/diretórios.
+```
+
+```bash
+~ rmdir -v [diretório] # Exibe o status de progresso da remoção do(s) diretório(s).
+~ rmdir -p [diretório] # Faz a remoção do diretório especificado e de seus diretórios pais, quando informado o caminho correspondente.
+```
+
+##### Criação de links
+
+Dentro de um sistema Linux, podemos criar links simbólicos e links físicos, conhecidos respectivamente como softlinks e hardlinks.
+
+- Links simbólicos (softlinks): São links que equivalentes a atalhos para arquivos, estes links podem ter como alvos diretórios ou arquivos que estejam em filesystems distintos.
+  - O tamanho de um arquivo de link simbólico é exatamente igual a quantidade de caracteres do caminho do alvo.
+  - O link será quebrado apenas se o arquivo/diretório alvo for movido/apagado.
+
+Para realizar a criação de um link simbólico, devemos utilizar o comando 'ln' com a opção '-s', conforme a sintaxe abaixo:
+
+ln -s [caminho arquivo original] [caminho arquivo softlink]
+
+A seguir temos um exemplo prático, a criação de um link simbólico para o diretório '/var/log'.
+
+```bash
+~ ln -s /var/log /opt/log
+```
+
+- Links físicos (hardlinks): São um ou mais nomes que possuem como alvo um 'inode' de um sistema de arquivos, estes links não podem ter um diretório como alvo, apenas arquivos. Além disso, não podem ter como alvo arquivos que estão em um filesystem distinto.
+    - Hardlinks para um mesmo inode, possuem o mesmo tamanho do arquivo para o qual ele está apontando.
+    - Os arquivos não são apagados enquando existir links que possuem como alvo um inode específico.
+
+Para realizar a criação de um link físico, basta utilizar o comando 'ln' sem qualquer opção e informar os caminhos correspondentes:
+
+ln [caminho arquivo original] [caminho hardlink]
+
+
+
+```bash
+~
+```
 
 #### Aula 1.3 Localizar arquivos e expressões regulares
+
+
 
 ### Aula 02 - Editor de Textos e Shell
 #### Aula 2.1 Conhecendo o Editor VIM
