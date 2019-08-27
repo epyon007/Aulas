@@ -345,15 +345,18 @@ Outra possibilidade é encaminhar a saída e o erro padrão para um mesmo arquiv
 ~ cat /tmp/arquivos
 ```
 
+Caso o administrador queira filtrar os dados do início de um arquivo, pode utilizar o comando **head** para verificar as primeiras linhas. O administrador pode definir a quantidade de linhas que deseja exibir com a opção **-n**.
 
+Caso não seja definido o número de linhas a serem exibidas o comando exibe por padrão as primeiras.
 
 ```bash
 ~ head /etc/services
 ~ head -n 3 /etc/services
 ```
 
-#### Opções úteis do comando head
+Um comando similar ao **head**, o **tail** tem a função de filtrar dados presentes no final de um arquivo. Assim como no head, a opção **-n** permite definir quantas linhas serão exibidas na saída do comando.
 
+A exemplo do head, caso não sejam definidas a quantidade de linhas a serem exibidas, o comando exibe por padrão as 10 últimas.
 
 ```bash
 ~ tail /etc/services
@@ -361,6 +364,11 @@ Outra possibilidade é encaminhar a saída e o erro padrão para um mesmo arquiv
 ```
 
 #### Opções úteis do comando tail
+```bash
+~ tail -f /etc/passwd # Mantém a saída padrão monitorando se há alguma entrada adicional no final do arquivo, útil para checagem de logs durantetroubleshooting.
+```
+
+O comando **sort** tem como função ordenar a saída de dados lidos dentro de um arquivo, a opção **-n** compara de acordo com valores numéricos do texto e a opção **-d** considera apenas espaços em branco e caracteres alfanuméricos
 
 ```bash
 ~ sort /etc/passwd
@@ -396,6 +404,45 @@ awk -F : '{print $1}' /etc/passwd
 
 
 #### Aula 1.3 Localizar arquivos e expressões regulares
+
+Durante a utilização de sistemas Linux, muitas vezes precisamos pesquisar para descobrir onde estão determinados arquivos, baseando-se em datas de modificação, nomes, etc. Para realizar essa atividade, temos comandos como o **find**.
+
+```bash
+~ find /usr/share/doc -name '*.pdf'
+```
+
+#### Opções úteis do find
+
+```bash
+~ find [caminho] -name 'arquivo.extensão' # Pesquisa arquivos baseando-se no nome e na respectiva extensão do mesmo, a pesquisa é feita dentro do diretório indicado em "[caminho]".
+~ find [caminho] -type l # Pesquisa arquivos do tipo "link" presentes dentro do caminho especificado.
+~ find [caminho] -type d # Pesquisa por diretorios presentes dentro do caminho especificado.
+~ find [caminho] -maxdepth 1 -type 1 # A opção "maxdepth" define quantos níveis de diretórios o comando "find" se aprofundará durante a pesquisa.
+~ find [caminho] -size +10000k -type f # A opção "size" faz com que a busca se baseie no tamanho dos arquivos presentes no diretório.
+~ find [caminho] -size +10000k -type f -exec du -h {} \; # A opção "-exec" permite que seja realizado um comando utilizando a saída correspondente a pesquisa realizada na primeira parte do comando. As chaves *{}* representam o arquivo encontrado durante a pesquisa.
+~ find [caminho] -iname '*.pdf' | xargs -i mv {} /tmp/pdfbackup/ # A opção "-iname" serve para pesquisar baseando-se no nome do arquivo, mas não é case-sensitive. O comando "xargs" a exemplo da opção "-exec" utiliza a saída do comando "find" para executar novos comandos, utilizando argumentos adicionais para alterar a última saída dos comandos.
+```
+
+Além do **find** também podemos utilizar para realizar a pesquisa o comando locate, que utiliza uma palavra para realizar a pesquisa do nome do arquivo.
+Para utilizar este comando, devemos instalar o pacote mlocate.
+
+```bash
+~ apt install mlocate
+```
+
+Após realizar a instalação, podemos realizar um teste criando um arquivo e em seguida fazer a pesquisa utilizando o comando locate.
+
+```bash
+~ touch arquivo.txt
+~ locate arquivo.txt
+```
+Apesar de o pacote mlocate estar instalado e o arquivo.txt existir, não conseguimos encontrar o arquivo. Isso ocorreu porque a base de dados utilizada pelo comando locate para realizar a pesquisa está desatualizada, por isso, devemos atualizar o banco de dados antes de realizar a pesquisa, utilizando o comando **updatedb**
+
+```bash
+~ sudo updatedb # Atualiza o banco de dados utilizado pelo comando locate para realizar pesquisas de arquivos.
+~ locate arquivo.txt
+```
+
 
 
 
