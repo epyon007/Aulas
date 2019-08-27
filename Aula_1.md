@@ -306,9 +306,9 @@ Vamos começar com um exemplo prático:
 ```bash
 ~ ls /etc/*.conf > /tmp/lista.txt
 ```
-No comando acima, nós listamos todos os arquivos que estão no diretório **/etc** e que terminam com os caracteres **.conf**, após a realização do comando todos os dados processados pelo computador foram inseridos no arquivo **/tmp/lista.txt**.
+No comando acima, nós listamos todos os arquivos que estão no diretório **/etc** e que terminam com os caracteres **.conf**. Após a realização do comando, todos os dados processados pelo computador foram inseridos no arquivo **/tmp/lista.txt**.
 
-Ao utilizar o redirecionador **'>'**, toda a saída do comando sobrescreverá o arquivo para o qual ela foi enviada, não preservando dados que já estavam naquele arquivo.
+Ao utilizar o redirecionador **'>'**, toda a saída do comando sobrescreverá o arquivo para o qual ela foi enviada, não preservando dados que já estavam naquele documento.
 
 Caso o administrador não queira que os dados anteriores sejam sobrescritos, ele deverá utilizar um redirecionador diferente, o **'>>'**. Ao utilizar **'>>'**, a saída do comando será adicionada ao final do arquivo, logo após os dados que já estavam salvos.
 
@@ -368,7 +368,7 @@ A exemplo do head, caso não sejam definidas a quantidade de linhas a serem exib
 ~ tail -f /etc/passwd # Mantém a saída padrão monitorando se há alguma entrada adicional no final do arquivo, útil para checagem de logs durantetroubleshooting.
 ```
 
-O comando **sort** tem como função ordenar a saída de dados lidos dentro de um arquivo, a opção **-n** compara de acordo com valores numéricos do texto e a opção **-d** considera apenas espaços em branco e caracteres alfanuméricos
+O comando **sort** tem como função ordenar a saída de dados lidos a partir de um arquivo, a opção **-n** compara de acordo com valores numéricos do texto e a opção **-d** considera apenas espaços em branco e caracteres alfanuméricos.
 
 ```bash
 ~ sort /etc/passwd
@@ -396,13 +396,11 @@ Serve para mostrar seções de cada linha do arquivo, por padrão utiliza tabula
 Utilizado para apagar ou substituir caracteres durante a realização de filtros, como os aplicados no exemplo. No comando as opções [:lower:] e [:upper:], indicam que a saída a ser exibida é a substituição de letras minúsculas por letras
 
 #### Comando **awk**
-Outra forma de realizar este mesmo filtro baseando-se nos campos do arquivo, é utilizando o comando **awk**. A opção **-F** define um delimitador a ser considerado dentro do arquivo, no caso o caractere **':'**. A entrada **'{print $1}'**, indica o primeiro campo de cada linha do arquivo podendo ser editado para exibir outros campos **{print $2}, {print $3},** etc.
+Outra forma de realizar este mesmo filtro baseando-se nos campos do arquivo, é utilizando o comando **awk**. A opção **-F** define um delimitador a ser considerado dentro do arquivo, no caso o caractere **':'**. Os campos são definidos a partir da entrada '{print $1}'. Para definir os demais campos, basta substituir o numeral 1 pelo número do campo desejado.
 
 ```bash
 awk -F : '{print $1}' /etc/passwd
 ```
-
-
 #### Aula 1.3 Localizar arquivos e expressões regulares
 
 Durante a utilização de sistemas Linux, muitas vezes precisamos pesquisar para descobrir onde estão determinados arquivos, baseando-se em datas de modificação, nomes, etc. Para realizar essa atividade, temos comandos como o **find**.
@@ -443,6 +441,11 @@ Apesar de o pacote mlocate estar instalado e o arquivo.txt existir, não consegu
 ~ locate arquivo.txt
 ```
 
+### Expressões regulares
+
+Antes de continuarmos com o conceito de expressões regulares, também conhecidas como **Regex**, precisamos conhecer alguns caracteres que são bastante utilizados na criação destas expressões.
+
+- O asterisco (*) realiza a combinação de qualquer caractere'1
 
 
 
