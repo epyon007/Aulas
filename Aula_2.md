@@ -196,13 +196,248 @@ Para voltar ao padrão anterior, devemos utilizar o comando **:% s/yeslogin/nolo
 
 Em seguida, basta salvar o arquivo e sair teclando **:wq**.
 
-```bash
 
+### Opções do Modo de Comando
+
+Vamos abrir o arquivo **/tmp/fstab** para testar opções adicionais do Modo de Comando do VIM.
+
+```bash
+~ vim /tmp/fstab
+```
+Após acessar o arquivo, dentro do Modo de Comando temos alguns comandos que podemos utilizar para facilitar a nossa vida durante a edição de arquivos.
+
+- **:set** - Exibe o resumo de configurações padrão que já estão definidas em arquivos de configuração do VIM;
+- **:set ic** - Ignora as buscas case sensitive;
+- **:set number** - Realiza a numeração das linhas do arquivo;
+- **:set nonumber** - Remove a numeração das linhas do arquivo, caso esteja habilitada;
+- **:set hlsearch** - Realça as palavras que foram pesquisadas dentro do arquivo;
+- **:set nohlsearch** - Desativa o realce das palavras que foram pesquisadas;
+- **:syntax off** - Desabilita o uso de cores dentro do VIM;
+- **:syntax on** - Habilita o uso de cores dentro do VIM, facilitando a leitura;
+- **! ls /etc** - Executa um comando do shell estando dentro do arquivo de texto;
+- **r ls /etc** - Executa um comando do shell estando dentro do arquivo e redireciona a saída deste comando para dentro do arquivo.
+
+#### Outras Opções
+
+- **:split** - Divide a tela do vim horizontalmente;
+- **:vsplit** - Dívide a tela do vim verticalmente;
+- **:e <caminho_do_arquivo>** - Abre um arquivo estando dentro de outro arquivo.
+
+#### Personalizando o editor
+
+Para definir algumas permissões padrão no Vim, nós precisamos acessar acessar o arquivo **/etc/vim/vimrc**(no Debian) ou **/etc/vimrc**(em distribuições Red Hat) e definir as configurações dentro dele.
+
+```bash
+~ sudo vim /etc/vim/vimrc +$
 ```
 
+Após acessar o arquivo **vimrc**, basta adicionar os parâmetros que já haviamos listado anteriormente, conforme abaixo.
 
 ```bash
-
+....
+set ic
+set number
+set hlsearch
+syntax on
 ```
+
+Após realizar as edições, utilizar **:wq** no Modo de Comando e salvar o arquivo.
+
+#### Editando linhas
+```bash
+~ vim /tmp/passwd
+```
+No Modo de Comando do vim, vamos testar as opções a seguir:
+
+- **:10 d** - Opção utilizada para excluir apenas a linha número 10 do arquivo;
+- **:1;5 d** - Opção utilizada para excluir o intervalo das linhas 1 a 5;
+- **:1;5 y** - Opção utilizada para copiar o intervalo da linha 1 até a linha 5;
+- **:10** - Move o cursor para a linha de número 10;
+- **p** - Usado para colar as linhas que estão em buffer (sejam elas copiadas ou recortadas).
+- **:1;10 s/nologin/yeslogin/g** - Substitui a string *nologin* pela *yeslogin* no intervalo da linha 1 até a linha 10;
+- **:g/nologin/d** - Remove linhas que possuam a string *nologin*;
+- **:1;10 g/nologin/d** - Remove linhas que possuam a string *nologin* e estejam no intervalo da linha 1 até a linha 10
+
+Após realizar todos os comandos, vamos continuar a prática editando linhas de um outro arquivo.
+
+```bash
+~ cp /etc/adduser.conf /tmp/
+~ vim /tmp/adduser.conf
+```
+
+Após acessar o arquivo vamos utilizar mais alguns comandos para manipular remover as linhas em branco e linhas comentadas presentes dentro do arquivo, conforme abaixo:
+
+- **:g/^\s\*$/d** - remove apenas as linhas em branco
+- **:g/^\s\*#/d** - remove apenas as linhas comentadas
+
+Após realizar esse teste, podemos sair do arquivo sem salvá-lo, utilizando '**:q!**'.
+
+#### Personalizar arquivo de mensagem de login
+
+Antes de começarmos a edição do arquivo de mensagem de login do sistema, precisaremos instalar um pacote, o **figlet**.
+
+```bash
+~ sudo apt install figlet
+```
+
+Após a realização do comando de instalação, podemos utilizar o comando **figlet** para criar a mensagem de boas vindas que queremos inserir no arquivo **/etc/issue**.
+
+```bash
+~ figlet Dexter Courier
+```
+
+Após utilizar o pacote que acabamos de instalar, vamos encaminhar a saída deste comando para o arquivo **/etc/issue**.
+
+Não temos permissões para realizar essa ação, por isso, precisaremos alternar para o usuário *root*.
+
+```bash
+~ sudo su -
+~ figlet Dexter Courier > /etc/issue
+```
+
+Ao final do arquivo **issue**, adicionaremos a mensagem:
+
+```bash
+=============================================================
+        ACESSO RESTRITO APENAS PARA PESSOAS AUTORIZADAS
+                   SERVIDOR MONITORADO
+```
+
+Sem sair do arquivo **issue**, precisamos substituir as barras invertidas **"\\"** por **"\\\\"**, pois o shell não interpretará uma barra única.
+
+Dentro do modo de comando do vim, deveremos utilizar o comando **:%s/\\/\\\\/g**.
+
+Após realizar estas edições, basta salvar o arquivo e sair utilizando **:x** e em seguida testar o acesso local da máquina.
 
 #### Aula 2.3 Configurar Shell e Timezone
+
+# Inserir figura relacionada ao esquema do shell
+
+O que é uma shell?
+
+Podemos definir uma “shell” como a camada de acesso ao sistema básico no sistema operacional do computador.
+
+Uma “shell” pode ser personalizada para atender as necessidades do administrador. Como exemplos de personalização podemos citar a definição de um idioma padrão, personalização e
+automatização de processos entre outras coisas.
+
+Nos tópicos a seguir, veremos como fazer algumas dessas personalizações nos servidores da empresa Dexter.
+O BASH é um interpretador do Shell, ele é utilizado como padrão de diversas distribuição Linux.
+
+Atalhos do BASH:
+- CTRL + W Apaga a ultima palavra;
+- CTRL + U Apaga toda a linha;
+- CTRL + R Executa busca reversa no History;
+- CTRL + D Sai do terminal;
+- ESC +. Insere no terminal o ultimo termo do ultimo comando.
+
+# Inserir figura sobre variaveis de ambiente
+
+##### Variáveis
+Variáveis de ambiente (ou globais) têm seus nomes sempre em maiúsculas;
+Variáveis de shell (ou locais) têm seus nomes sempre em maiúsculas;
+O shell em si não faz distinção de nomes em maiúsculas ou minúsculas pra ele são a mesma
+coisa. A diferença é apenas para ajudar na interpretação do usuário.
+
+Tendo o conceito em mente, agora vamos praticar com variáveis dentro do **shell**.
+
+Pra começar, vamos criar uma variável de ambiente chamada **"LOCAL"** com o valor **"valor"**
+
+```bash
+~ LOCAL=valor
+~ echo $LOCAL
+```
+ Após a execução do comando **echo**, o shell deve retornar a string **"valor"**.
+
+ ```bash
+~ bash
+~ echo $LOCAL
+ ```
+
+ ##### Variável Local
+
+ Após executar um novo **bash** e em seguida executar o **echo** para exibir o valor da variável, é importante observar que a saída do comando realizado não retorna valor nenhum.
+ Isso ocorreu porque a variável que criamos anteriormente é uma variável local, isto é, funciona somente na sessão do shell em que ela foi definida.
+ Como iniciamos um novo shell sem exportar a variável, é como se ela nunca tivesse existido.
+
+ ##### Descrição dos comandos
+
+ - echo — Mostra mensagens. A opção -n pode ser usada para que não ocorra o salto de linha após a mensagem ser mostrada.
+
+ - bash — Inicia uma nova sessão do interpretador de comandos.
+
+Para solucionarmos essa dificuldade enfrentada com a variável local, basta exportarmos a variável que queremos utilizar.
+
+Para exportar uma variável no momento em que a definirmos, utilizamos o comando **export**, este comando também é capaz de exportar variáveis que já haviam sido declaradas anteriormente.
+
+```bash
+~ export CURSO=Linux
+~ echo $CURSO
+```
+Vamos realizar um teste, vamos iniciar um novo shell e em seguida utilizar um **echo** para exibir o valor da variável. O valor de saída do comando deve ser idêntico ao da saída da execução anterior.
+
+```bash
+~ bash
+~ echo $CURSO
+```
+
+Vamos verificar em qual bash estamos conectados para comprovar que o EXPORT da variável funcionou corretamente.
+
+```bash
+~ echo $SHLVL
+~ exit
+```
+
+##### Variável Global
+Quando criamos uma variável com o comando EXPORT, estamos declarando que esta variável terá o seu valor exportado a partir deste bash para todos os outros que vierem a ser abertos a partir dele.
+
+A variável **SHLVL** armazena o valor de qual bash estamos logados no momento.
+
+Exemplo:
+
+Caso estivéssemos no primeiro bash, o valor da variável **SHLVL** seria 1, o segundo bash teria o valor 2 e assim sucessivamente.
+
+Dentro do shell, nós podemos listar as variáveis de ambiente existentes com os comandos **set** e **env**.
+
+```bash
+~ set
+```
+O **set** exibe na tela todas as variáveis de ambiente existentes atualmente, sejam elas apenas variáveis locais ou variáveis globais.
+
+
+```bash
+~ env
+```
+
+O **env** também exibe na tela variáveis de ambiente existentes, porém, a saída do comando exibe apenas as variáveis exportadas (globais). Além disso, o env também é capaz de alterar o valor de uma variável apenas no momento da execução de um comando específico.
+
+Para excluir uma variável é necessário utilizar o comando **unset** *[nome da variavel]*.
+
+```bash
+~ echo $CURSO
+~ unset CURSO
+~ echo $CURSO
+```
+
+# <!VALIDAR>
+
+Todo software que é executado no Linux precisa de várias informações para que possa funcionar corretamente: nome de usuário, tamanho do terminal, tipo do terminal, localização do executável, localização de alguma biblioteca, etc.
+
+Sem este tipo de informação não é possível utilizar o sistema de modo produtivo já que seria necessário passar tais informações a cada programa que for usar – e todas as vezes que for usar o mesmo programa.
+
+Quais são as variáveis mais importantes?
+Algumas variáveis você vai encontrar em qualquer sistema Linux que você usar na vida. Elas definem alguns parâmetros importantes para que você consiga usar o sistema tranquilamente, sem ter que ficar lembrando parâmetros antes de começar a usar o sistema.
+
+Algumas destas variáveis são:
+- HOME: Define o diretório home do usuário logado;
+- PATH: Define os diretórios usados para encontrar os comandos;
+- SHELL: Define o shell que está sendo utilizado;
+- PWD: Define em qual diretório você está no momento;
+- USER: Define o usuário que está logado;
+- EDITOR: Define o editor de textos padrão para aplicações que invocam editores de texto automaticamente.
+
+Se não existisse uma variável de ambiente chamada PATH você teria que digitar todo o caminho do comando para listar por exemplo: ls. Quando você digita o comando ls, o sistema busca esse comando em algum diretório que esteja na variável PATH.
+
+Visualizar o conteúdo de uma variável:
+echo $PATH
+
+# <>
