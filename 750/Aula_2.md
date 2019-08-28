@@ -441,3 +441,67 @@ Visualizar o conteúdo de uma variável:
 echo $PATH
 
 # <>
+
+Vamos ver na prática as variáveis **HOME**, **USER**, **PATH**, **PWD**, **SHELL** E **EDITOR**, vamos digitar os comandos abaixo no terminal:
+
+```bash
+~ echo $HOME
+~ echo $USER
+```
+
+```bash
+~ echo $PATH
+~ echo $PWD
+```
+
+```bash
+~ echo $SHELL
+~ echo $EDITOR
+```
+
+Para editar o nosso prompt de comando, podemos alterar alguns valores que ficam armazenados na variável PS1.
+Podemos alterar esta variável para personalizar como será o layout do nosso **ps1** no shell.
+
+Para isso, precisamos conhecer alguns parâmetros:
+
+Argumento | Descrição
+----------|----------
+\W | Diretório corrente
+\w | Caminho completo do diretório corrente
+\u | Nome do usuário
+\t | Hora do sistema
+\d | Data
+\h | Host da máquina
+\$ | Identificação do usuário (# ou $)
+
+Para editar a ps1, temos como exemplo o comando a seguir:
+
+```bash
+~ export PS1='\h-[\W]\u >'
+```
+
+# <! VALIDAR>
+Quando o usuário se loga, o sistema fará a autenticação, configurará o ambiente e iniciará o shell. No caso do bash, o próximo passo é a leitura do arquivo /etc/profile;
+
+Este arquivo contém comandos que são executados para todos os usuários do sistema no momento do login. Somente o usuário root pode ter permissão para modificar este arquivo;
+
+Este arquivo é lido antes do arquivo de configuração pessoal de cada usuário (.profile, .bash_profile, .bash_logout e .bash_login).
+
+Ordem de Carregamento:
+Se este arquivo /etc/profile existe o shell processa o conteúdo armazenado nos arquivos: /.bash_profile, /.bash_login e /.bash_logout nessa ordem.
+
+Se não existe nenhum o arquivo /etc/bashrc é executado.
+- ~/.bash_profile: executado por shells que usam autenticação;
+-  ~/.bashrc: executado por shells que não usam autenticação;
+-  ~/.bash_login: executado quando um usuário efetua o login;
+-  ~/bash_logout: executado quando um usuário efetua o logout.
+
+Executar um comando no login e logout
+Para que um comando seja executado quando o usuário efetua LOGIN (iniciar uma sessão) ou
+LOGOUT (finalizar a sessão), insira o seu comando nos respectivos arquivos que devem estar
+localizados no HOME de cada usuário:
+.bash_login
+.bash_logout
+
+
+# <>
