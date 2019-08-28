@@ -445,21 +445,98 @@ Apesar de o pacote mlocate estar instalado e o arquivo.txt existir, não consegu
 
 Antes de continuarmos com o conceito de expressões regulares, também conhecidas como **Regex**, precisamos conhecer alguns caracteres que são bastante utilizados na criação destas expressões.
 
-- O asterisco (*) realiza a combinação de qualquer caractere'1
+### INSERIR FIGURA RELACIONADA A EXPRESSÕES REGULARES
 
 
+Após checarmos os caracteres comumente utilizados durante a criação de expressões regulares, vamosa prática.
+No primeiro comandos abaixo, vamos pesquisar dentro do arquivo **/etc/services** todas as linhas que possuem a sigla **udp** e no comando seguinte, todas as linhas que começam com a sigla **tcp** (isso graças ao **^** utilizado durante a expressão).
 
-### Aula 02 - Editor de Textos e Shell
-#### Aula 2.1 Conhecendo o Editor VIM
-#### Aula 2.2 VIM Avançado
-#### Aula 2.3 Configurar Shell e Timezone
+```bash
+~ cat /etc/services | grep udp
+~ cat /etc/services | grep ^tcp
+```
+O comando **grep** procura por um texto específico dentro de arquivos ou a partir de uma entrada padrão, utilizando como referência o texto setado pelo utilizador do sistema.
 
-### Aula 03 - Instalação de Programas
-#### Aula 3.1 Gerenciadores de Pacotes
-#### Aula 3.2 Gerenciar pacotes DPKG e RPM
-#### Aula 3.3 Compilação de Pacotes
+#### Opções úteis comando grep
 
-### Aula 04 -  Gerenciamento de Usuários
-#### Aula 4.1 Administrando Usuários
-#### Aula 4.2 Permissões Especiais
-#### Aula 4.3 Configuração do Sudo
+Para realizar expressões regulares, o usuário possui duas opções, utilizar o comando **egrep** ou usar a opção **-E** no próprio comando **grep**, conforma abaixo:
+
+```bash
+~ grep -E [valor_pesquisado] [caminho/nome do arquivo] # Permite a utilização de expressões regulares estendidas.
+~ grep -v [valor_pesquisado] [caminho/nome do arquivo] # Neste caso o filtro é invertido, com o -v todas as linhas que possuirem 'udp' NÃO serão exibidas.
+~ grep -n [valor_pesquisado] [caminho/nome do arquivo] # Exibe o número de linha do arquivo na saída da pesquisa.
+~ grep -c [valor_pesquisado] [caminho/nome do arquivo] # Imprime na tela apenas a contagem de linhas com o item pesquisado.
+~ grep -l [valor_pesquisado] [caminho/nome do arquivo] # Exibe apenas o nome dos arquivos que possuem a entrada pesquisada e não o seu conteúdo.
+```
+
+Nos dois comandos a seguir, temos um exemplo de filtragem das linhas do arquivo **/etc/services** que possuam em seu conteúdo as entradas 25, 110 e 143.
+O comando **egrep** acaba tendo a mesma função do comando **grep -E**, permitindo o uso de expressões regulares estendidas.
+
+```bash
+~ grep -E '25|110|143' /etc/services
+~ egrep '25|110|143' /etc/services
+```
+
+Em seguida, um exemplo de como realizar um filtro inverso a pesquisa, utilizando o comando **egrep -v**. Nesta pesquisa serão exibidas apenas as linhas que não possuem a sigla **udp**.
+
+```bash
+~ egrep -v udp /etc/services
+```
+
+A seguir, vamos utilizar uma combinação de caracteres coringa para realizar o filtro no mesmo arquivo. Neste filtro serão exibidas as linhas que não estejam em branco e que não sejam linhas comentadas.
+
+```bash
+~ egrep '^$|^#' /etc/services
+~ egrep -v '^$|^#' /etc/services
+```
+
+Nos dois comandos a seguir, é possível ver a diferença entre filtrar o conteúdo de arquivos e mostrar apenas o nome do arquivo que possui o valor pesquisado.
+
+```bash
+~ grep suporte /etc/* 2> /dev/null
+~ grep -l suporte /etc/* 2> /dev/null
+```
+
+O comando **sed** nos permite filtrar apenas uma linha determinada, utilizando a opção **-n**. Em um dos comandos a seguir, podemos ver a utilização **-n '5p'**, indicando a quinta linha do arquivo /etc/passwd.
+
+O **sed** também é capaz de realizar substituições de strings dentro de arquivos, a partir da utilização da opção **-i**.
+
+```bash
+~ sed -n '5p' /etc/passwd
+
+~ cp /etc/passwd /tmp
+~ sed -i s/suporte/seunome/ /tmp/passwd
+~ cat /tmp/passwd
+```
+A partir do comando sed, é possível remover linhas vazias e comentadas também, utilizando-se os caracteres específicos para criação de expressões regulares. Por segurança, antes de realizamos essa ação, vamos fazer um backup do arquivo que vamos manipular.
+
+```bash
+~ cp /etc/adduser.conf /tmp
+```
+
+Com o backup pronto, vamos utilizar o sed para retirar as linhas vazias e comentadas, conforme indicado anteriormente. Para isso, se faz necessária a utilização do caractere **^**, indicando o começo da linha do arquivo.
+
+```bash
+~ sed -i '/^#/d;/^$/d' /tmp/adduser.conf
+~ cat /tmp/adduser.conf
+```
+
+Após realizar a remoção das linhas comentadas e vazias, podemos utilizar também o comando **diff** para comparar o arquivo editado com o arquivo original, mostrando as mudanças realizadas entre os dois.
+
+```bash
+~ diff /etc/adduser.conf /tmp/adduser.conf
+```
+
+
+### LAB GAMIFICATION
+
+1 - Exibir a versão de liberação do kernel.
+2 - Listar arquivos ocultos do diretório /etc.
+3 - Criar uma estrutura de diretórios /tmp/backups/confs
+4 - Copiar do /etc os arquivos que começam com a letra b e c para /tmp/backup/confs
+5 - Criar link simbólico com o nome /servers que aponta para /etc/hosts.
+6 - Filtrar as primeiras 5 linhas do arquivo /etc/passwd.
+7 - Usar o comando sed para exibir a quinta linha do arquivo /etc/passwd.
+8 - Usar o awk para filtrar a primeira coluna do arquivo /etc/passwd.
+9 - Encontrar todos os arquivos em /etc com o tamanho acima de 5000kbytes.
+10 - Encontre todos os arquivos PDF em /usr/share/doc e copiar para o /tmp.
