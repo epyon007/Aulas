@@ -272,4 +272,242 @@ $ cd /var/cache/yum/x86_64/7/
 $ ls epel/packages/ccze*
 ```
 #### Aula 3.2 Gerenciar pacotes DPKG e RPM
+
+Nesta aula, conheceremos um pouco mais sobre os gerenciadores de pacote de baixo nível, manipulando pacotes com as ferramentas **DPKG** e **RPM**.
+
+##### Conhecendo o comando DPKG
+
+Vamos começar verificando as opções do comando **dpkg** com a opção **--help**.
+
+```bash
+~ sudo dpkg --help
+```
+
+
+Após veriicar as opções disponíveis com o comando anterior, vamos utilizar a opção **-l** para listar os pacotes instalados na máquina atualmente.
+
+```bash
+~ sudo dpkg -l
+~ sudo dpkg -l | egrep 'htop|bash|sudo'
+~ sudo dpkg -l | egrep "libc6|libncursesw5|libtinfo5"
+```
+
+Vamos verificar o status do pacote **bash** instalado, utilizando a opção **-s**.
+
+```bash
+~ sudo dpkg -s bash
+```
+
+##### Opções do comando dpkg
+
+#<! VALIDAR dpkg --help>
+- **-l** (list) — Lista todos os programas instalados;
+- **-s** (status) — Verifica o status de um programa instalado;
+- **-S** (search) — Busca o nome do programa que instalou determinado comando, arquivo ou biblioteca;
+- **-I** (Info)** — Exibe informações de um pacote a ser instalado;
+- **-i** (install) — Realiza a instalação de um pacote;
+- **-L** (list) — Lista todos os arquivos gravados no disco referente a um programa instalado.
+
+A partir da opção **-S** do **dpkg** vamos listar o programa que realizou a instalação do comando top.
+
+```bash
+~ which htop
+~ sudo dpkg -S /usr/bin/top
+```
+
+Para listar informações de um pacote a ser instalado, é necessário utilizar a opção **-I** do comando **dpkg**.
+
+```bash
+~ sudo dpkg -I /opt/pacotes/htop.deb
+~ sudo dpkg -I /opt/pacotes/htop.deb | grep -i depends
+```
+
+Após ter checado as informações referentes ao pacote, basta utilizarmos o comando **dpkg -i**. Após a realização da instalação, podemos conferir o resultado a partir da opção -**l**.
+
+```bash
+~ sudo dpkg -i /opt/pacotes/htop.deb
+~ sudo dpkg -l htop
+```
+
+
+##### Removendo programas desnecessários nos servidores
+- **-r** - Remove um programa sem suas dependências. Remoção Parcial;
+
+```bash
+$ sudo dpkg -l | less
+$ sudo dpkg -l | grep figlet
+$ sudo dpkg -r figlet
+$ sudo dpkg -l | grep figlet
+```
+- **--purge** — Remove um programa e seus arquivos de configuração. Remoção Completa.
+
+```bash
+$ sudo dpkg -r bc
+$ sudo dpkg -l bc
+$ sudo dpkg --purge bc
+$ sudo dpkg -l bc
+```
+
+##### Conhecendo o comando RPM
+
+Vamos começar verificando as opções do comando **rpm**.
+
+```bash
+~ sudo rpm --help
+```
+
+Para listar todos os programas instalados, utilizamos a opção **-qa**:
+
+```bash
+~ sudo rpm -qa
+~ sudo rpm -qa | grep htop
+~ sudo rpm -qa | grep bash
+```
+
+Para verificarmos o status de um programa que já está instalado, utilizamos a opção **-qi**.
+
+```bash
+~ sudo rpm -qi bash
+```
+
+##### Opções do comando rpm
+
+- **-qa** — Lista todos os programas instalados;
+- **-qi** — Exibe informações sobre o programa instalado;
+- **-qf** — Busca o nome do programa responsável por instalar um determinado comando, arquivo ou biblioteca;
+- **-qpi** — Exibe informações de um pacote a ser instalado;
+- **-qpR** — Lista dependências do pacote;
+- **-ivh** — Instala um pacote mostrando detalhes (v) com uma barra de progresso (h);
+- **-ql** — Lista todos os arquivos do programa;
+- **-e** — Remove um programa sem suas dependências.
+
+Para pesquisar o nome do programa que instalou determinado comando, basta utilizarmos a opção **-qf**:
+
+```bash
+~ which top
+~ sudo rpm -qf /usr/bin/top
+```
+
+Para exibir informações de e dependências de um pacote a ser instalado, precisamos utilizar as opções **-qpi** e **qpR**, respectivamente:
+
+```bash
+~ sudo rpm -qpi /opt/pacotes/htop.rpm
+~ sudo rpm -qpR /opt/pacotes/htop.rpm
+```
+
+Após checarmos as informações necessárias, podemos realizar a instalação do pacote utilizando a opção **ivh**:
+
+```bash
+~ sudo rpm -ivh /opt/pacotes/htop.rpm
+```
+
+
+##### Removendo programas desnecessários nos servidores:
+
+
+## <! VALIDAR> Incluir descrições dos arquivos.
+```bash
+$ sudo rpm -ql htop
+$ sudo rpm -qa | less
+$ sudo rpm -qa | grep figlet
+$ sudo rpm -e figlet
+$ sudo rpm -qa | grep figlet
+```
+
+#### Alien
+
+Em alguns casos muito específicos, pode ser necessário converter os tipos de pacotes pré-compilados a serem instalados em uma distribuição.
+
+Para casos como esse, temos um pacote chamado **Alien**. Este pacote é capaz de converter um pacote **.deb** em um pacote **.rpm**, permitindo a instalação destes pacotes em distribuições onde não seria possível realizar a instalação.
+
+O **alien** também pode ser utilizado para realizar outros tipos de conversão, também dando suporte aos formatos Stamped (.SLP), Solaris (.Pkg) e Slackware (.Tgz, Txz, Tbz e .TLZ).
+
+### **Importante:**
+O uso do **alien** deve ser realizado apenas em situações de extrema necessidade. O ideal é utilizar o programa na última versão da sua distribuição.
+
+##### Conversão de pacotes
+
+Para praticar a conversão de formato, vamos começar fazendo o download do pacote **dateutils**, e em seguida vamos movê-lo do diretório de cache do **apt** para o nosso diretório atual.
+
+```bash
+~ sudo apt -d install dateutils
+~ sudo mv /var/cache/apt/archives/dateutils*.deb .
+```
+
+Após realizar a movimentação do arquivo, vamos instalar o **alien** e em seguida realizar a conversão do formato do arquivo com o novo pacote instalado.
+
+```bash
+~ sudo apt install alien
+~ alien -r --scripts dateutils*.deb
+~ ls
+```
+
+Após realizar a conversão do arquivo, vamos realizar a cópia do arquivo convertido para o servidor Stoage:
+
+```bash
+~ scp *.rpm storage
+```
+
+###### Opções do comando alien
+
+- **-r** — Converte um pacote .Deb em um pacote .RPM da Red Hat.
+- **--scripts** — Inclui scripts no pacote.
+
+
+Dentro do servidor **Storage**, vamos instalar uma ferramenta para reconstruir pacotes **.rpm**.
+
+```bash
+~ sudo yum install rpmrebuild
+```
+
+Após instalar a ferramenta **rpmrebuild**, devemos utilizar a opção -pe para editar o pacote, vamos remover as linhas a seguir:
+
+```bash
+~ sudo rpmrebuild -pe dateutils*.rpm
+
+%dir %attr(0755, root, root) "/" ###### REMOVER LINHA
+%dir %attr(0755, root, root) "/usr"
+%dir %attr(0755, root, root) "/usr/bin" ###### REMOVER LINHA
+```
+
+Em seguida basta salvar e sair do arquivo aberto.
+
+Após editar o arquivo, vamos realizar a instalação dele a partir do comando **rpm**.
+
+# <! Validar a opção -U e h do rpm>
+```bash
+~ sudo rpm -Uvh /root/rpmbuild/RPMS/x86_64/dateutils*.rpm
+```
+
+Após realizar a instalação, vamos checar se o pacote **dateutils** está presente no sistema.
+
+```bash
+~ sudo rpm -qa | grep dateutils
+~ ls -l /usr/bin | grep dateutils
+```
+
+Agora que instalamos, e checamos se a instalação ocorreu vamos realizar o teste da ferramenta que acabamos de adicionar, exibindo a data de ontem e a data de amanhã com os comandos abaixo:
+
+```bash
+~ dateutils.dconv yesterday
+~ dateutils.dconv tomorrow
+```
+
+##### Converter pacotes no CentOS
+
+Além do **Alien** temos também outro comando que faz a conversão de pacotes. Temos o comando **rpm2cpio** que como o nome diz, nos permite converter arquivos com formato **.rpm** para o formato **.cpio**.
+
+```bash
+~ sudo rpm2cpio /opt/pacotes/htop.rpm | cpio -t
+```
+
+Para realizar a conversão do pacote .rpm para um pacote .cpio, basta executarmos o comando:
+
+```bash
+~ sudo rpm2cpio /opt/pacotes/htop.rpm > htop.cpio
+~ file htop.cpio
+~ cat htop.cpio | cpio -t
+```
+
+
 #### Aula 3.3 Compilação de Pacotes
