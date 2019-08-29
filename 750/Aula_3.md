@@ -511,3 +511,273 @@ Para realizar a conversão do pacote .rpm para um pacote .cpio, basta executarmo
 
 
 #### Aula 3.3 Compilação de Pacotes
+
+Neste tópico aprenderemos sobre comandos necessários para configurar, compilar e instalar um pacote a partir de seu código fonte.
+
+![](assets/Aula_3-9aeb81c9.png)
+
+###### Instalação de Pacotes
+
+Antes de instalar qualquer programa a partir de seu código fonte, o primeiro passo e ser dado é fazer o download desse pacote. De maneira geral, é possível fazer isso acessando a página do desenvolvedor do pacote.
+
+O processo de compilação de um pacote parte da premissa que através do código fonte disponibilizado, qualquer pessoa possa gerar o binário do programa.
+
+O processo de compilação é bastante parecido entre todas as aplicações, de maneira geral. Porém, é importante consultar os arquivos **INSTALL** e **README** antes de executar a compilação, estes arquivos costumam estar junto ao código fonte do programa.
+
+
+##### Entendendo os prós e contras de se utilizar Compilação
+
+PRÓS | CONTRAS
+-----|------
+Customização (Performance / Tunning) | Falta de padronização e controle.
+Última versão | Sujeira no servidor
+Processo independente de distribuição | Perda de performance ou má configuração
+ -   | Processo de atualização manual
+
+##### Cenários onde pode-se optar por compilar um programas
+
+- A versão pré-compilada da distribuição não oferece o recurso desejado;
+- Quando não existe uma versão pré-compilada para a sua distribuição;
+- Quando existe uma necessidade específica para tunning no programa que não é suportado pelo pacote pré-compilado;
+- Quando a versão oferecida pela distribuição é muito antiga.
+
+
+##### Preparando o ambiente para a compilação
+
+```bash
+~ sudo apt install build-essential
+```
+
+```bash
+~ sudo gcc --version
+```
+
+```bash
+~ sudo make
+```
+
+
+##### Descrição dos comandos
+- **gcc** — Faz pré-processamento, compilação, montagem e vinculação.
+- **make** — Determinará automaticamente quais partes de um programa grande precisam ser recompiladas e emitirá os comandos para recompilá-los informações de um pacote a ser instalado.
+
+
+##### Compilando aplicação exemplo
+
+Antes de tudo vamos mudar para o usuário root para executar os comandos adicionais:
+```bash
+~ su -
+```
+
+Vamos descompactar o arquivo modelo presente no subdiretório **/usr/local/src**:
+```bash
+~ tar -xf /opt/pacotes/program.tar.gz -C /usr/local/src
+```
+
+Em seguida, vamos acessar o diretório onde será realizada  a compilação para realizar a leitura do arquivo de documentação:
+```bash
+~ cd /usr/local/src/program
+~ less README
+```
+
+###### Descrição dos comandos
+- **tar** — Compacta e extrai arquivos de um arquivo de fita ou disco.
+- **less** — Permite fazer a paginação de arquivos ou da entrada padrão.
+
+###### Opções do comando tar
+- **-x** — Extrai arquivos de um arquivo.
+- **-f** — Define o nome do arquivo.
+
+Para realizar uma verificação do sistema, vamos executar o script **configure**.
+
+```bash
+~ ./configure
+```
+Em seguida, devemos fazer a compilação e instalação através dos comandos a seguir:
+```bash
+~ make
+~ make install
+```
+
+Vamos verificar também onde o programa foi instalado, com os comandos a seguir:
+```bash
+~ which program
+~ program
+```
+
+###### Descrição dos comandos
+- **which** - Busca a localização de um programa no PATH do sistema.
+
+###### Comando Configure
+
+Em geral, sempre que pegamos o código fonte de um programa ele virá com um aplicativo chamado configure que irá executar uma verificação em seu sistema a fim de verificar se ele dispõe de todos os componentes básicos para uma compilação bem sucedida.
+
+###### Arquivo Makefile
+
+A Makefile em geral é criada utilizando a ferramenta configure e o objetivo desta é automatizar os processos de compilação, verificação e instalação dos softwares.
+
+A Makefile é estruturada em seções, cada uma delas realiza alguma tarefa específica. Em geral essas Makefiles vêm com pelo menos três seções padrão: default, install e clean.
+
+###### Instalação
+É muito comum, quando compilamos um programa a partir de seu código fonte, que alguns de seus requisitos não estejam presentes, ocasionando assim um erro durante a execução do
+configure.
+
+Quando isso ocorrer, deve-se identificar o componente que está faltando, instalá-lo e executar novamente o configure até que ele termine com sucesso.
+
+##### Compilando aplicação NTOPNG
+
+# <! Pesquisar o que é NTOPNG >
+- **NTOPNG** - É uma ferramenta de análise de rede. Gera gráficos de monitoramento das interface de rede, observando diversos protocolos.
+
+  - Dependências:
+    - **nDPI**: Biblioteca LGPLv3 de código aberto, para inspeção profunda de pacotes;
+    - **Redis**: Servidor de armazenamento de estrutura de dados de chave-valor de código aberto.
+
+###### Obtendo e configurando o nDPI
+
+Vamos precisar estar logados como usuário root, precisamos instalar o grupo de pacotes para compilar e instalar aplicações:
+
+```bash
+~ sudo su -
+~ yum groupinstall "Development tools"
+```
+
+Após instalar o pacote anterior, precisaremos fazer o download do código fonte da aplicação nDPI, através do comando *git*:
+
+```bash
+~ git clone https://github.com/ntop/nDPI.git
+~ ls
+```
+
+Após realizado o download, vamos acessar o diretório da aplicação e executar o script para gerar o **configure**:
+
+```bash
+~ cd nDPI
+~ ./autogen.sh
+```
+
+#### Instalação
+
+Ao compilarmos um programa a partir de seu código fonte, é muito comum que alguns de seus requisitos não estejam presentes, ocasionando assim erros durante a execução do **configure**.
+Quando isso ocorrer, devemos identificar o componente que está causand a falha, instalá-lo e executar novamente o **configure** até que ele termine com sucesso.
+
+Para resolver o problema de dependências, vamos precisar instalar o pacote a seguir:
+
+```bash
+~ yum install libpcap-devel
+```
+
+Vamos executar novamente o script **autogen.sh** e em seguida o **configure**
+
+```bash
+~ ./autogen.sh
+~ ./configure
+```
+
+Depois de concluídos os scripts anteriores, basta executar os comandos a seguir para realizar a compilação e a instalação:
+
+```bash
+~ make
+~ make install
+```
+
+Após concluir a instalação, precisamos voltar ao diretório **HOME** do root, para realizar a compilação do **NTOPNG**.
+
+```bash
+~ git clone https://github.com/ntop/ntopng.git
+~ ls
+~ cd ntopng/
+```
+
+Para verificarmos o sistema, vamos utilizar os scripts **autogen** e **configure**:
+```bash
+~ ./autogen.sh
+~ ./configure
+```
+
+##### Resolvendo Dependências
+
+![](assets/Aula_3-e5e9e894.png)
+
+###### Instalando dependências
+O pacote “Development tools” é uma série de pacotes onde contém todos os utilitários necessários referente a desenvolvimento, onde a grande maioria dos pacotes referente a
+Development (Desenvolvimento) são encontrados.
+
+Agora, enfrentaremos novamente alguns problemas com dependências, para corrigí-los vamos instalar os pacotes necessários e executar **./configure** até que o processo seja concluído:
+
+```bash
+~ yum install libcurl-devel
+~ ./configure
+```
+```bash
+~ yum install libsqlite3x-devel
+~ ./configure
+```
+```bash
+~ yum install mariadb-devel
+~ ./configure
+```
+Após concluirmos a resolução das dependências, podemos utilizar o comando **make** para realizar a compilação:
+
+```bash
+~ make
+```
+
+Vamos resolver mais um problema de dependências e a seguir realizar a compilação e instalação do pacote.
+
+```bash
+~ yum install rrdtool-devel
+~ make
+~ make install
+```
+
+Para concluir todo o processo, basta instalar e iniciar o serviço do **Redis**:
+
+```bash
+~ yum install redis
+~ systemctl start redis
+```
+
+Antes de iniciar a execução do binário, vamos verificar a interface de rede interna a partir do comando **ifconfig**:
+
+```bash
+~ ifconfig
+```
+
+Vamos iniciar o serviço NTOPNG, utilizando a interface de rede interna na porta 3000:
+```bash
+~ ntopng -i enp0s8 -w 3000 &
+```
+
+Após iniciar a aplicação, vamos verificar se a porta 3000 está ouvindo requisições:
+```bash
+~ ss -putan | grep 3000
+```
+
+Após checar a porta, vamos acessar a aplicação a partir de um navegador da máquina base.
+Utilizando o endereço ip 172.16.100.103:3000, na interface de login da aplicação, serão solicitados *login* e *senha*, basta usar **admin** em ambos os campos.
+
+Quando você acessar a aplicação, será solicitado que você realize a troca de senha.
+
+![](assets/Aula_3-656975cd.png)
+
+
+Após concluir a troca de senha, você acessará o dashboard da aplicação.
+
+![](assets/Aula_3-ca10c158.png)
+
+Pronto, está concluída a compilação do **ntopng**.
+
+
+### LAB GAMIFICATION 3
+
+1 - Instalar o pacote alien.
+2 - Remover o pacote ntpdate.
+3 - Usar o comando para encontrar o pacote rpm que possui o arquivo /etc/passwd .
+4 - Usar o comando para listar os arquivos de documentação do pacote openssh.
+5 - Verificar somente se o pacote openssh esta instalado
+6 - Exibir informações do pacote /opt/pacotes/htop.rpm.
+7 - Exibir dependencias do pacote /opt/pacotes/htop.rpm
+8 - Converter o pacote sl_3.03-17+b2_amd64.deb para RPM estando na pasta /opt/pacotes .
+9 - Através do comando gcc verificar sua versão.
+10 - Através do comando make listar as opções.
