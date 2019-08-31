@@ -10,6 +10,24 @@ A partir desse gerenciamento nos tornamos capazes de definir níveis de permiss�
 ##### Objetivo da aula:
 Aprender a criar e manipular configurações de usuários e grupos do sistema, bem como adicionar usuários, grupos e pastas departamentais definindo permissões específicas para seus respectivos usuários e grupos.
 
+###### - Regras que aplicaremos Referente ao Gerenciamento de Usuários:
+
+- **Política de Senha:**
+Expirar a cada 30 dias, mínimo 6 caracteres;
+
+- **Pastas Pessoais:**
+Armazenar em /srv/homes/
+Conter os Diretórios: Documentos, Downloads, Imagens
+
+- **Pastas Departamentais:**
+Armazenar em /srv/dexter/
+
+- **Padrão de Nome de Usuários:**
+Login do Usuário: nome.sobrenome
+Senha Padrão: 4linux
+
+
+
 ##### Arquitetura de arquivos na criação de um usuário
 
 ![](assets/Aula_5-21c98e02.png)
@@ -17,7 +35,6 @@ Aprender a criar e manipular configurações de usuários e grupos do sistema, b
 Dentro de sistemas Linux, temos alguns arquivos que possuem informações específicas sobre diferentes itens relacionados a gerenciamento de usuários, conforme vemos na figura acima.
 
 No entanto, é bom conhecer quais arquivos armazenam quais itens, para facilitar a realização dessas tarefas diárias.
-
 
 
 ##### Componentes do arquivo /etc/passwd
@@ -105,7 +122,7 @@ Para começar, vamos verificar as opções do comando **adduser** e adicionar o 
 ~ sudo adduser dexter
 ```
 
-Em seguida vamos adicionar um outro usuário e também definir a sua respectivas senha:
+Em seguida vamos adicionar um outro usuário (**bryan.leah**) e também definir a sua respectivas senha:
 
 ```bash
 ~ sudo adduser bryan.leah
@@ -118,6 +135,46 @@ Vamos verificar se o novo usuário foi criado:
 ~ sudo tail -n 2 /etc/passwd /etc/group /etc/shadow
 ~ ls /home
 ```
+
+Após checar se o usuário **bryan.leah** foi criado, vamos verificar o diretório **/home** do usuário dexter e em seguida vamos modificar algumas configurações.
+
+Vamos definir um novo local para armazenamento dos direorios pessoais dos usuários, conforme:
+
+```bash
+~ ls /home
+~ ls /srv/homes
+```
+
+Como podemos ver, os diretórios pessoais dos usuários foram criados dentro do **/home** e não dentro do **/srv/home**, como definido anteriormente. Vamos alterar esta configuração:
+
+
+```bash
+~ sudo mkdir /srv/homes
+~ sudo usermod -m -d /srv/homes/dexter dexter
+```
+
+Após alterar a localização 
+
+###### Descrição dos comandos
+
+- **adduser** — Cria usuários no sistema. No Debian por padrão não aceita login com o “.” (ponto),
+portanto é preciso usar a opção –force-badname.
+- **passwd** — Modifica a senha de um usuários no sistema.
+- **usermod** — Altera informações de usuários sem precisar editar arquivos de configuração.
+Prefira sempre usá-lo ao invés de editar diretamente o /etc/passwd.
+  - Opções do comando usermod
+    - **-m** — Move o conteúdo do diretório pessoal para a nova localização (use somente com -d).
+    - **-d** — Novo diretório de login para a nova conta de usuário.
+
+- *Outros comandos para administrar arquivos do sistema*
+  - vipw — Edita configurações de usuários diretamente no arquivo /etc/passwd.
+  - vipw -s — Edita configurações de senhas dos usuários diretamente no arquivo /etc/shadow.
+  - vigr — Edita configurações de grupos dos usuários diretamente no arquivo /etc/group.
+  - vigr -s — Edita configurações de senhas de grupos dos usuários diretamente no arquivo
+/etc/gshadow.
+
+
+
 
 #### Aula 4.2 Permissões Especiais
 
