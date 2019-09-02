@@ -11,15 +11,15 @@ Afinal, no cotidiano precisamos realizar atividades simples como navegar entre d
 
 ~ passwd - realiza troca de senha de usuário ou grupo, o usuário pode alterar apenas a senha de sua própria conta. Para alterar a senha de outros usuários o perfil que está realizando a mudança precisa ter privilégios de root.
 
-  passwd -d [login]    /- *[delete]* remove a senha da conta indicada;
-  passwd -l [login]    /- *[lock]* trava a conta indicada;
-  passwd -u [login]    /- *[unlock]* destrava a conta indicada.
+- passwd -d [login]    /- *[delete]* remove a senha da conta indicada;
+- passwd -l [login]    /- *[lock]* trava a conta indicada;
+- passwd -u [login]    /- *[unlock]* destrava a conta indicada.
 
 ~ hostname - exibe o nome do host da máquina onde se está executando o comando.
 
-  hostname -f     /- *[fqdn]* - versão longa do hostname
-  hostname -d     /- *[domain]* - nome de dominio
-  hostname -i     /- *[ip-address]* - mostra todos os endereços ip do host
+- hostname -f     /- *[fqdn]* - versão longa do hostname
+- hostname -d     /- *[domain]* - nome de dominio
+- hostname -i     /- *[ip-address]* - mostra todos os endereços ip do host
 
 
 <ADVANCED>
@@ -34,10 +34,10 @@ Afinal, no cotidiano precisamos realizar atividades simples como navegar entre d
 Linux     benihime  5.0.0-23-generic  #24~18.04.1-Ubuntu SMP Mon Jul 29 16:12:28 UTC 2019   x86_64 x86_64 x86_64                         GNU/Linux
 [kernel] [nodename] [kernel-release]          [kernel-version]                              [machine - processor - hardware platform]   [SO]
 
-  uname -a   /- exibe todas as informações (omite processador e plataforma se forem desconhecidos)
-  uname -r   /- exibe a versão do lançamento do kernel
-  uname -v   /- mostra a data em que o kernel foi criado
-  uname -n   /- mostra o nome da máquina
+- uname -a   /- exibe todas as informações (omite processador e plataforma se forem desconhecidos)
+- uname -r   /- exibe a versão do lançamento do kernel
+- uname -v   /- mostra a data em que o kernel foi criado
+- uname -n   /- mostra o nome da máquina
 
 As vezes precisamos executar comandos que exigem permissões que usuários comuns não possuem, nesses casos utilizamos o *sudo*.
 
@@ -68,11 +68,11 @@ Dentro do shell, podemos utilizar os comandos *ls* e *pwd* para listar arquivos 
 
 ~ ls
 
-  ls -d   /- lista os diretórios e não seu conteúdo (usar dois exemplo *ls /etc*)
-  ls -a   /- lista todos os arquivos, inclusive os iniciados com ""**.**"", que são arquivos ocultos.
-  ls -lh  /- -l indica a exibição em formato de lista, o h indica uma saída "mais legivel" para o operador.
-  ls -lhrt  /- o r, indica uma inversão na ordem da exibição , o t ordena por horario de modificação, sendo os mais novos primeiro.
-  ls -R   /- o R, indica uma listagem recursiva nos diretórios, serão listados todos os arquivos e diretórios dos diretórios subsequentes.
+-  ls -d   /- lista os diretórios e não seu conteúdo (usar dois exemplo *ls /etc*)
+-  ls -a   /- lista todos os arquivos, inclusive os iniciados com ""**.**"", que são arquivos ocultos.
+-  ls -lh  /- -l indica a exibição em formato de lista, o h indica uma saída "mais legivel" para o operador.
+-  ls -lhrt  /- o r, indica uma inversão na ordem da exibição , o t ordena por horario de modificação, sendo os mais novos primeiro.
+-  ls -R   /- o R, indica uma listagem recursiva nos diretórios, serão listados todos os arquivos e diretórios dos diretórios subsequentes.
 
 
 Caracteres coringa
