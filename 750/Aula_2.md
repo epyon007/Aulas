@@ -1,7 +1,8 @@
 ### Aula 02 - Editor de Textos e Shell
 #### Aula 2.1 - Editores de Textos
 
-file:///home/tiago/Pictures/Editor_texto_01.png
+
+
 - Vim
 O "Vi" é o editor básico do GNU/Linux, e está disponível em grande parte das distribuições Linux, o
 vim é uma versão mais completa e com mais recursos do que o "Vi", cujo seu significado é "Vim =
