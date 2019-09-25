@@ -1,24 +1,21 @@
 ### Aula 02 - Editor de Textos e Shell
 #### Aula 2.1 - Editores de Textos
 
-#<! VALIDAR>
+file:///home/tiago/Pictures/Editor_texto_01.png
 - Vim
 O "Vi" é o editor básico do GNU/Linux, e está disponível em grande parte das distribuições Linux, o
 vim é uma versão mais completa e com mais recursos do que o "Vi", cujo seu significado é "Vim =
 VI iMproved".
 
 #### Outros Editores de Texto
-●
-Vi – Sem dúvida nenhuma o editor mais famoso de todos os tempos, presente em quase todas
+- Vi – Sem dúvida nenhuma o editor mais famoso de todos os tempos, presente em quase todas
 as distribuições.
-●
-Nano – Editor padrão de muitas distribuições como Debian, CentOS, esse editor é diferente do
+- Nano – Editor padrão de muitas distribuições como Debian, CentOS, esse editor é diferente do
 “vim” e é muito fácil de ser usado.
-● Pico – Muito parecido com o “nano”, este está presente nas distribuições Slackware e Gentoo.
-● Mcedit – Editor muito fácil e completo. Seu grande diferencial é a possibilidade da utilização do
+- Pico – Muito parecido com o “nano”, este está presente nas distribuições Slackware e Gentoo.
+- Mcedit – Editor muito fácil e completo. Seu grande diferencial é a possibilidade da utilização do
 mouse, mesmo no ambiente textual.
-●
-Ed – O editor de textos mais simples no mundo Unix, o “ed” é um editor de linha para terminais
+- Ed – O editor de textos mais simples no mundo Unix, o “ed” é um editor de linha para terminais
 aonde não é possível abrir uma janela de edição.
 
 #<>
