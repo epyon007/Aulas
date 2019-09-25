@@ -1,7 +1,7 @@
 ### Aula 02 - Editor de Textos e Shell
 #### Aula 2.1 - Editores de Textos
 
-
+![](assets/Aula_2-a98647b1.png)
 
 - Vim
 O "Vi" é o editor básico do GNU/Linux, e está disponível em grande parte das distribuições Linux, o
@@ -19,7 +19,6 @@ mouse, mesmo no ambiente textual.
 - Ed – O editor de textos mais simples no mundo Unix, o “ed” é um editor de linha para terminais
 aonde não é possível abrir uma janela de edição.
 
-#<>
 
 ```bash
 touch arquivo1.txt
@@ -36,7 +35,8 @@ touch -d '01 May 2010 'arquivo1.txt
 stat arquivo1.txt
 ```
 
-#<! VALIDAR>
+![](assets/Aula_2-669f2f89.png)
+
 - Pico
 O histórico, clássico editor de texto para Linux, chama-se "Pico" ("Pine Composer").
 Consiste na sessão para edição de texto de um antigo cliente para e-mail (originalmente em Unix)
@@ -45,7 +45,6 @@ O Pine e o Pico, na realidade, não são softwares livres, foram desenvolvidos p
 Departamento de Computação Aplicada à Comunicação da Universidade de Washington. No início
 da Internet, quando a Web ainda não existia, o Pine era o principal cliente para mandar e receber e-
 mails.
-#<>
 
 ```bash
 ~ pico # Para iniciar o editor pico
@@ -60,7 +59,6 @@ CTRL + X
 
 Após inserir o texto desejado, basta seguir a orientação dada pelo menu para realizar ações como navegar dentro do arquivo, recortar e colar textos, salvar o documento, etc.
 
-## Colar figura relacionada a janela de navegação do comando PICO.
 
 Para salvar, basta teclar **'CTRL + O'**.
 
@@ -68,7 +66,8 @@ Após apertar as teclas, será solicitado o nome do arquivo a ser salvo, já que
 
 Para sair sem salvar, basta teclar **'CTRL + X'**.
 
-<! VALIDAR>
+![](assets/Aula_2-9e4e2725.png)
+
 - nano
 
 Nano é um editor de texto que deve ser executado a partir de um terminal, sua distinção
@@ -90,17 +89,18 @@ nano.txt
 CTRL + X
 ```
 
-# Inserir figura de navegação do comando NANO
+![](assets/Aula_2-1d3fdb8b.png)
 
 As teclas de atalho para realização de comandos dentro do NANO são basicamente as mesmas utilizadas no PICO
 
-<! VALIDAR>
-# Editor de texto Vim
+### VIM
+
+![](assets/Aula_2-e896dc74.png)
+
 O Vi é um dos mais antigos, (1976), editores de texto em linha de comando para Unix e
 Linux. Derivado do Ed, do Ex, Joe e de outros editores de linha rudimentares.
 O Vim (Vi Improved) é uma versão mais poderosa e maior em termos de espaço em disco e
 requisitos de memória do editor de texto vi.
-#<>
 
 ```bash
 ~ vimtutor # Utilizado para apresentar algumas funções do edtiro VIM, uma espécie de tutorial sobre o programa.
@@ -315,9 +315,12 @@ Dentro do modo de comando do vim, deveremos utilizar o comando **:%s/\\/\\\\/g**
 
 Após realizar estas edições, basta salvar o arquivo e sair utilizando **:x** e em seguida testar o acesso local da máquina.
 
+![](assets/Aula_2-dc4e1064.png)
+
 #### Aula 2.3 Configurar Shell e Timezone
 
 ![](assets/Aula_2-e01f0aee.png)
+
 O que é uma shell?
 
 Podemos definir uma “shell” como a camada de acesso ao sistema básico no sistema operacional do computador.
@@ -334,8 +337,6 @@ Atalhos do BASH:
 - CTRL + R Executa busca reversa no History;
 - CTRL + D Sai do terminal;
 - ESC +. Insere no terminal o ultimo termo do ultimo comando.
-
-# Inserir figura sobre variaveis de ambiente
 
 ##### Variáveis
 Variáveis de ambiente (ou globais) têm seus nomes sempre em maiúsculas;
@@ -430,7 +431,7 @@ Todo software que é executado no Linux precisa de várias informações para qu
 Sem este tipo de informação não é possível utilizar o sistema de modo produtivo já que seria necessário passar tais informações a cada programa que for usar – e todas as vezes que for usar o mesmo programa.
 
 Quais são as variáveis mais importantes?
-Algumas variáveis você vai encontrar em qualquer sistema Linux que você usar na vida. Elas definem alguns parâmetros importantes para que você consiga usar o sistema tranquilamente, sem ter que ficar lembrando parâmetros antes de começar a usar o sistema.
+Algumas variáveis você vai encontrar em qualquer sistema Linux que você utilizar. Elas definem alguns parâmetros importantes para que você consiga usar o sistema tranquilamente, sem ter que ficar lembrando parâmetros antes de começar a usar o sistema.
 
 Algumas destas variáveis são:
 - HOME: Define o diretório home do usuário logado;
@@ -485,7 +486,6 @@ Para editar a ps1, temos como exemplo o comando a seguir:
 ~ export PS1='\h-[\W]\u >'
 ```
 
-# <! VALIDAR>
 Quando o usuário se loga, o sistema fará a autenticação, configurará o ambiente e iniciará o shell. No caso do bash, o próximo passo é a leitura do arquivo /etc/profile;
 
 Este arquivo contém comandos que são executados para todos os usuários do sistema no momento do login. Somente o usuário root pode ter permissão para modificar este arquivo;
@@ -493,11 +493,11 @@ Este arquivo contém comandos que são executados para todos os usuários do sis
 Este arquivo é lido antes do arquivo de configuração pessoal de cada usuário (.profile, .bash_profile, .bash_logout e .bash_login).
 
 Ordem de Carregamento:
-Se este arquivo /etc/profile existe o shell processa o conteúdo armazenado nos arquivos: /.bash_profile, /.bash_login e /.bash_logout nessa ordem.
+Se este arquivo /etc/profile não existir, o shell processa o conteúdo armazenado nos arquivos: /.bash_profile, /.bash_login e /.bash_logout nessa ordem.
 
 Se não existe nenhum o arquivo /etc/bashrc é executado.
-- ~/.bash_profile: executado por shells que usam autenticação;
--  ~/.bashrc: executado por shells que não usam autenticação;
+- ~/.bash_profile: executado por shells que usam autenticação (evento de login);
+-  ~/.bashrc: executado por shells que não usam autenticação (não é um evento de login);
 -  ~/.bash_login: executado quando um usuário efetua o login;
 -  ~/bash_logout: executado quando um usuário efetua o logout.
 
@@ -509,10 +509,7 @@ localizados no HOME de cada usuário:
 .bash_logout
 
 
-# <>
-
-
-Vamos agora definir uma mensagem padrão de boas vindas no arquivo **.bash_login**. Não temos o arquivo criado em nossa home, por isso vamos criá-lo com o **vim** e inserir a mensagem de boas vindas.
+Vamos agora definir uma mensagem padrão de boas vindas no arquivo **.bash_login**. Não temos o arquivo criado em nossa *home*, por isso vamos criá-lo com o **vim** e inserir a mensagem de boas vindas.
 É importante notar que, o arquivo **.bash_login** será lido apenas se o arquivo **.bash_profile** não exista.
 
 ```bash
@@ -555,11 +552,14 @@ alias mv='mv -i'
 comando unalias.
 
 
-# adicionar descrição das linhas inseridas no exemplo do arquivo .bashrc
+No exemplo de entrada do arquivo *.bashrc* exibido acima, foram adicionadas diversas entradas de *alias* para realizar alterações leves nos comportamentos dos comandos **ls**, **rm**, **cp** e **mv**.
+
+Por exemplo, após inserir as entradas de *alias* dos comandos, adicionamos o parâmetro **-i** como padrão para os comandos **rm**, **cp** e **mv**. Assim dispensamos a necessidade de utilizar **-i** na execução de cada comando.
+
+adicionar descrição das linhas inseridas no exemplo do arquivo .bashrc
 
 
-# <! VALIDAR>
-Auditando o Shell
+##### Auditando o Shell
 A variável TMOUT é responsável por controlar o tempo de inatividade do Shell.
 Declarando ela no arquivo /etc/profile qualquer usuário que logar no modo texto e ficar inativo por
 300 segundos (5 minutos) será deslogado automaticamente.
@@ -575,8 +575,6 @@ export TMOUT=120
 # source /etc/profile
 # echo $TMOUT
 ```
-
-# <>
 
 Após editar o arquivo **.bashrc** precisamos executar o comando **source** para forçar o carregamento destas configurações, pois o sistema assumiu como configurações os padrões que já estavam pré definidos antes de editarmos o arquivo.
 
@@ -594,7 +592,6 @@ Hora de verificar se as variáveis de ambiente e os '*aliases*' foram carregados
 ~ alias
 ```
 
-# <! VALIDAR>
 ##### Auditando o Shell
 
 Para remover os comandos duplicados usa-se a variável HISTCONTROL.
@@ -617,26 +614,23 @@ export HISTTIMEFORMAT='%d-%m-%Y %H:%M - '
 # source /root/.bashrc
 # history
 ```
-# <>
 
 
 #### Ajustando o Timezone do sistema
 
 ![](assets/Aula_2-787067bd.png)
 
-# <! VALIDAR>
 Alterando o idioma do sistema
 As principais variáveis usadas para determinar qual idioma os programas localizados utilizarão
 são:
 
-- LANG: Especifica o idioma_PAIS local. Podem ser especificados mais de um idioma na mesma
-variável separando-os com :, desta forma caso o primeiro não esteja disponível para o
+- **LANG**: Especifica o idioma_PAIS local. Podem ser especificados mais de um idioma na mesma
+variável separando-os com **:**, desta forma caso o primeiro não esteja disponível para o
 programa o segundo será verificado e assim por diante;
-- LC_MESSAGES: Especifica o idioma que serão mostradas as mensagens dos programas. Seu
+- **LC_MESSAGES**: Especifica o idioma que serão mostradas as mensagens dos programas. Seu
 formato é o mesmo de LANG;
-- LC_ALL: Configura todas as variáveis de localização de uma só vez. Seu formato é o mesmo
+- **LC_ALL**: Configura todas as variáveis de localização de uma só vez. Seu formato é o mesmo
 de LANG.
-# <>
 
 ##### Alterando o idioma do sistema
 
@@ -662,9 +656,9 @@ A seguir, devemos definir o idioma padrão do sistema a partir do comando **upda
 
 ##### Descrição dos comandos
 
-- locale-gen — Permite gerar arquivos de localização de modelos.
-- dpkg-reconfigure — Permite reconfigurar um pacote já instalado.
-- update-locale — Permite modificar configurações globais de localidade.
+- **locale-gen** — Permite gerar arquivos de localização de modelos.
+- **dpkg-reconfigure** — Permite reconfigurar um pacote já instalado.
+- **update-locale** — Permite modificar configurações globais de localidade.
 
 
 #### Alterando a timezone
@@ -690,8 +684,8 @@ Sabendo as timezones disponíveis, podemos enfim definir uma nova timezone para 
 
 ##### Descrição dos comandos
 
-- timedatectl list-timezones — Lista os fusos horários disponíveis, um por linha.
-- timedatectl set-timezone — Defina o fuso horário do sistema para o valor especificado. Esta
+- **timedatectl list-timezones** — Lista os fusos horários disponíveis, um por linha.
+- **timedatectl set-timezone** — Defina o fuso horário do sistema para o valor especificado. Esta
 chamada irá alterar o link simbólico /etc/localtime.
 
 Além de definir nossa própria timezone, podemos checar também informações sobre outras timezones existentes.
@@ -705,13 +699,13 @@ Nos comandos a seguir, vamos buscar informações das timezones das cidades do C
 
 ### LAB GAMIFICATION 2
 
-1 - Abrir de forma vertical no editor VIM os arquivos /etc/passwd e /etc/fstab.
-2 - Utilizar o editor VIM para abrir o arquivo /etc/group na última linha.
-3 - Configurar de forma definitiva o destaque da string pesquisada no VIM.
-4 - Abrir de forma horizontal no editor VIM os arquivos /etc/group e /etc/hosts.
-5 - Declarar uma variavel global de nome LAB com o valor LINUX.
-6 - Listar somente as variaveis globais.
-7 - Definir o comando para limpar a tela no logout da sessão.
-8 - Definir o comando para mostrar o calendário no login da sessão.
-9 - Criar o apelido linuxcommand para o comando cal no arquivo .bashrc
-10 - Executar o comando para listar as timezones disponíveis.
+- 1 - Abrir de forma vertical no editor VIM os arquivos /etc/passwd e /etc/fstab;
+- 2 - Utilizar o editor VIM para abrir o arquivo /etc/group na última linha;
+- 3 - Configurar de forma definitiva o destaque da string pesquisada no VIM;
+- 4 - Abrir de forma horizontal no editor VIM os arquivos /etc/group e /etc/hosts;
+- 5 - Declarar uma variavel global de nome LAB com o valor LINUX;
+- 6 - Listar somente as variaveis globais;
+- 7 - Definir o comando para limpar a tela no logout da sessão;
+- 8 - Definir o comando para mostrar o calendário no login da sessão;
+- 9 - Criar o apelido linuxcommand para o comando cal no arquivo .bashrc;
+- 10 - Executar o comando para listar as timezones disponíveis.
