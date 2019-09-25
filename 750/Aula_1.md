@@ -126,11 +126,12 @@ Para listar os arquivos e diretórios em formato de árvore, nós temos o comand
 
 ~ **stat arquivo1** - Exibe informações relacionadas ao arquivo, como data de acesso, número de inode, tamanhoe onde está armazenado;
 
-~ stat arquivo2
+~ **stat arquivo2**
 
-No dia a dia é bastante comum movermos, copiar ou renomear arquivos e diretórios, para realizar essas ações é necessário conhecer os comandos corretos de forma a facilitar o trabalho.
+No dia a dia é bastante comum movermos, copiar ou renomear arquivos e diretórios. Para realizar essas ações é necessário conhecer os comandos corretos de forma a facilitar o trabalho.
 
 Para copiar arquivos e diretórios, utilizamos o comando 'cp':
+
 ``` bash
 ~ cp /etc/hosts /tmp
 ```
@@ -222,7 +223,9 @@ A seguir temos um exemplo prático, a criação de um link simbólico para o dir
 
 Para realizar a criação de um link físico, basta utilizar o comando 'ln' sem qualquer opção e informar os caminhos correspondentes:
 
-ln [caminho arquivo original] [caminho hardlink]
+```bash
+~ ln [caminho arquivo original] [caminho hardlink]
+```
 
 Exemplo prático para criação de hardlink para o arquivo '/etc/hosts'.
 
@@ -263,13 +266,13 @@ Além do comando 'man', temos também como ferramenta de apoio o comando 'help',
 ~ help unset
 ```
 
-Existem também um comando que possui a mesma função do **'man -k [comando]'**, o comando 'apropos'.
+Existem também um comando que possui a mesma função do **'man -k [comando]'**, o comando **'apropos'**.
 
 ```bash
 apropos unset
 ```
 
-Além destas ferramentas já citadas, podemos utilizar também a opção **--help** nos comandos que utilizarmos.
+Além destas ferramentas já citadas, podemos utilizar também a opção **"--help"** nos comandos que utilizarmos.
 
 ```bash
 ~ passwd --help
@@ -284,15 +287,15 @@ Além destas ferramentas já citadas, podemos utilizar também a opção **--hel
 
 Ao utilizar qualquer computador, nós precisamos de alguns dispositivos que permitam esta interação com o computador, são os chamados 'Dispositivos de entrada e saída'.
 
-Enquanto trabalhamos, estes dispositivos e enviam e recebem sinais, sendo as entradas enviadas por meio de mouse ou teclado e as saídas recebidas em monitores ou impressoras.
+Enquanto trabalhamos, estes dispositivos e enviam e recebem sinais, sendo as entradas enviadas por meio de mouse ou teclado e as saídas recebidas em monitores ou impressoras, por exemplo.
 
 Fundamentalmente, existem 3 tipos de sinais:
 
-- stdin (Standard Input) - Entrada de dados a serem processados pelo computador, utilizando mouse, teclado, scanner, etc. Dentro do shell, o dispositivo de entrada padrão é o teclado;
+- **stdin (Standard Input)** - Entrada de dados a serem processados pelo computador, utilizando mouse, teclado, scanner, etc. Dentro do shell, o dispositivo de entrada padrão é o teclado;
 
-- stdout (Standard Output) - Informações de saída que são resultado de processamentos de comandos enviados a partir da entrada padrão, a saída pode ser vista a partir de monitores, impressoras, etc;
+- **stdout (Standard Output)** - Informações de saída que são resultado de processamentos de comandos enviados a partir da entrada padrão, a saída pode ser vista a partir de monitores, impressoras, etc;
 
-- stderr (Standard Error) - Informações de saída de erros que são resultado de processamentos enviados a partir da entrada padrão. Assim como no **stdout**, seu destino também é o monitor, mas este erro padrão também pode ser redirecionado para um arquivo, se necessário.
+- **stderr (Standard Error)** - Informações de saída de erros que são resultado de processamentos enviados a partir da entrada padrão. Assim como no **stdout**, seu destino também é o monitor, mas este erro padrão também pode ser redirecionado para um arquivo, se necessário.
 
 Conhecendo este conceito, podemos agora falar sobre redirecionadores, que servem para nos auxiliar na manipulação de entradas e saídas dentro de sistemas Linux.
 
@@ -313,7 +316,7 @@ Caso o administrador não queira que os dados anteriores sejam sobrescritos, ele
 ```
 O caractere PIPE ( **'|'** ), serve para redirecionarmos a saída de um comando como entrada de outro.
 
-Por exemplo, abaixo podemos utilizar o comando 'cat' no arquivo **/etc/passwd** e contar quantas linhas o arquivo possui com o comando **wc** e a opção **-l**, apenas em uma linha de comando.
+Por exemplo, abaixo podemos utilizar o comando **'cat'** no arquivo **/etc/passwd** e contar quantas linhas o arquivo possui com o comando **wc** e a opção **-l**, apenas em uma linha de comando.
 
 ```bash
 ~ cat /etc/passwd | wc -l
@@ -342,7 +345,7 @@ Outra possibilidade é encaminhar a saída e o erro padrão para um mesmo arquiv
 
 Caso o administrador queira filtrar os dados do início de um arquivo, pode utilizar o comando **head** para verificar as primeiras linhas. O administrador pode definir a quantidade de linhas que deseja exibir com a opção **-n**.
 
-Caso não seja definido o número de linhas a serem exibidas o comando exibe por padrão as primeiras.
+Caso não seja definido o número de linhas a serem exibidas o comando exibe por padrão as 10 primeiras.
 
 ```bash
 ~ head /etc/services
@@ -358,7 +361,7 @@ A exemplo do head, caso não sejam definidas a quantidade de linhas a serem exib
 ~ tail -n 3 /etc/services
 ```
 
-#### Opções úteis do comando tail
+#### Opção útil do comando tail
 ```bash
 ~ tail -f /etc/passwd # Mantém a saída padrão monitorando se há alguma entrada adicional no final do arquivo, útil para checagem de logs durantetroubleshooting.
 ```
@@ -440,8 +443,7 @@ Apesar de o pacote mlocate estar instalado e o arquivo.txt existir, não consegu
 
 Antes de continuarmos com o conceito de expressões regulares, também conhecidas como **Regex**, precisamos conhecer alguns caracteres que são bastante utilizados na criação destas expressões.
 
-### INSERIR FIGURA RELACIONADA A EXPRESSÕES REGULARES
-
+![](assets/Aula_1-00c93169.png)
 
 Após checarmos os caracteres comumente utilizados durante a criação de expressões regulares, vamosa prática.
 No primeiro comandos abaixo, vamos pesquisar dentro do arquivo **/etc/services** todas as linhas que possuem a sigla **udp** e no comando seguinte, todas as linhas que começam com a sigla **tcp** (isso graças ao **^** utilizado durante a expressão).
@@ -509,7 +511,7 @@ A partir do comando sed, é possível remover linhas vazias e comentadas também
 ~ cp /etc/adduser.conf /tmp
 ```
 
-Com o backup pronto, vamos utilizar o sed para retirar as linhas vazias e comentadas, conforme indicado anteriormente. Para isso, se faz necessária a utilização do caractere **^**, indicando o começo da linha do arquivo.
+Com o backup pronto, vamos utilizar o sed para retirar as linhas vazias e comentadas, conforme indicado anteriormente. Para isso, se faz necessária a utilização do caractere **"^"**, indicando o começo da linha do arquivo.
 
 ```bash
 ~ sed -i '/^#/d;/^$/d' /tmp/adduser.conf
@@ -525,13 +527,13 @@ Após realizar a remoção das linhas comentadas e vazias, podemos utilizar tamb
 
 ### LAB GAMIFICATION
 
-1 - Exibir a versão de liberação do kernel.
-2 - Listar arquivos ocultos do diretório /etc.
-3 - Criar uma estrutura de diretórios /tmp/backups/confs
-4 - Copiar do /etc os arquivos que começam com a letra b e c para /tmp/backup/confs
-5 - Criar link simbólico com o nome /servers que aponta para /etc/hosts.
-6 - Filtrar as primeiras 5 linhas do arquivo /etc/passwd.
-7 - Usar o comando sed para exibir a quinta linha do arquivo /etc/passwd.
-8 - Usar o awk para filtrar a primeira coluna do arquivo /etc/passwd.
-9 - Encontrar todos os arquivos em /etc com o tamanho acima de 5000kbytes.
-10 - Encontre todos os arquivos PDF em /usr/share/doc e copiar para o /tmp.
+- 1 - Exibir a versão de liberação do kernel.
+- 2 - Listar arquivos ocultos do diretório /etc.
+- 3 - Criar uma estrutura de diretórios /tmp/backups/confs
+- 4 - Copiar do /etc os arquivos que começam com a letra b e c para /tmp/backup/confs
+- 5 - Criar link simbólico com o nome /servers que aponta para /etc/hosts.
+- 6 - Filtrar as primeiras 5 linhas do arquivo /etc/passwd.
+- 7 - Usar o comando sed para exibir a quinta linha do arquivo /etc/passwd.
+- 8 - Usar o awk para filtrar a primeira coluna do arquivo /etc/passwd.
+- 9 - Encontrar todos os arquivos em /etc com o tamanho acima de 5000kbytes.
+- 10 - Encontre todos os arquivos PDF em /usr/share/doc e copiar para o /tmp.
