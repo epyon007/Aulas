@@ -219,3 +219,26 @@ Depois de executar os contêineres, basta acessar o endereço da nossa virtual m
 
 
 #### Aula X.3 Introdução ao Vagrant
+
+
+Ao acessar a maquina Docker com o usuário suporte, vamos remover os contêineres em execução:
+
+```bash
+~$ sudo docker rm -f $(sudo docker ps -qa)
+```
+
+Após remover os contêineres, vamos checar as opções do comando vagrant:
+
+```bash
+~$ vagrant
+```
+
+Para criar uma configuração inicial do vagrant, utilizamos o subcomando **init**:
+
+```bash
+~$ vagrant init
+```
+
+###### Descrição do comandos
+
+- **vagrant init** - Cria um arquivo **Vagrantfile** com as configurações do box que você informou no [box-name], caso você não tenha a box correspondente adicionada na máquina, é mandatório adicionar o [box-url] para que ele possa baixá-lo.
