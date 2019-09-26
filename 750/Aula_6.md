@@ -104,14 +104,118 @@ Mensageria **(Zaqar)** | SQS
 
 ###### **Métodos de instalação automática**
 
-
+- **DevStack**: Utiliza um shell script cujo objetivo é facilitar a criação do ambiente OpenStack;
+- **PackStack**: Utiliza o Puppet para automatizar a instalação de um ambiente OpenStack em distribuições CentOS/RedHat;
+- **Mirantis**: Utiliza o Vagrant para automatizar a instalação de um ambiente OpenStack.
 
 
 #### Aula X.2 Gerenciando Contêineres
 
-- **DevStack**: Utiliza um shell script cujo objetivo é facilitar a criação do ambiente OpenStack;
-- **PackStack**: Utiliza o Puppet para automatizar a instalação de um ambiente OpenStack em distribuições CentOS/RedHat;
-- **Mirantis**: Utiliza o Vagrant para automatizar a instalação de um ambiente OpenStack.
+###### Introdução ao Docker
+
+- Docker é uma plataforma escrita em **"Go"** (linguagem de programação desenvolvida pelo Google);
+- Constitui uma plataforma aberta para desenvolvedores e administradores de sistemas;
+- Permite construir, compartilhar e executar aplicações distribuídas e ainda executar aplicações em contêineres.
+
+![](assets/Aula_6-5839710e.png)
+
+Na máquina Docker, vamos utilizar o usuário suporte para listar contêineres, imagens e redes do Docker presentes no servidor:
+
+```bash
+~$ sudo docker ps -a
+~$ sudo docker image ls
+~$ sudo docker network ls
+```
+
+A seguir, vamos executar um contêiner chamado *linux-server* e listar os contêineres que estão em execução:
+
+```bash
+~$ sudo docker run -dit --name linux-server --hostname linux-server --net dexterlan ubuntu-ssh /bin/#!/usr/bin/env bash
+~$ sudo docker ps:
+```
+
+###### Descrição dos comandos:
+
+- **docker ps -a** - Lista todos os contêineres, em execução ou não;
+- **docker image ls** - Lista imagens de contêineres presentes no sistema;
+- **docker network ls** - Lista das redes que estão configuradas no docker;
+- **docker run** - Executa um contêiner.
+
+######  Opções do comando "docker run":
+- **--dit** - Executa o contêiner em background, no modo interativo e vinculado a um TTY;
+- **--name** - Define o nome do contêiner;
+- **--hostname** - Define o hostname da máquina do contêiner especificado;
+- **--net** - Define qual a rede o contêiner deverá utilizar.
+
+Após executarmos o contêiner anterior, se quisermos conectar a ele quando ele já estiver em execução utilizamos o comando:
+
+```bash
+~$ sudo docker exec -it linux-server bash
+```
+
+Depois de estar conectados ao contêiner, podemos utilizar os comandos a seguir para verificar as informações:
+
+```bash
+~$ hostname
+~$ cat /etc/hosts
+~$ exit
+```
+
+Para removermos o contêiner em execução e não remover a imagem base do contêiner, utilizamos o comando:
+
+```bash
+~$ sudo docker rm -f $ (sudo docker ps -qa)
+```
+
+###### Descrição dos comandos:
+
+- **docker rm** - Remove um contêiner do Docker.
+
+###### Opções do comando "docker rm":
+
+- **-f** ou **--force** - Força a remoção de um contêiner em execução;
+- **-l** ou **--link** - Remove um link especificado;
+- **-v** ou **--volumes** - Remove volumes associados a um contêiner.
+
+Ainda na máquina docker, vamos realizar o download das imagens oficiais do **MySQL** e **Wordpress**, em seguida vamos listar se elas constam na lista de imagens do servidor:
+
+```bash
+~$ sudo docker image pull mysql:5.7.22
+~$ sudo docker image pull Wordpress
+~$ sudo docker image ls
+```
+
+Em seguida vamos criar pastas para armazenar os dados do wordpress e mysql:
+
+```bash
+~$ mkdir html
+~$ mkdir banco
+```
+
+Depois de criar os diretórios para armazenar os dados, vamos executar um contêiner e em seguida checar se ele está em execução:
+
+```bash
+~$ sudo docker container run -e MYSQL_ROOT_PASSWORD=4linux -e MYSQL_DATABASE=wordpress --name dexter-mysql-server -v "$PWD/banco":/var/lib/mysql -d mysql:5.7.22
+~$ sudo docker container ls
+```
+
+Após executar o contêiner do MySQL, vamos executar o contêiner do Wordpress:
+
+```bash
+~$ sudo docker container run -e WORDPRESS_DB_PASSWORD=4linux --name dexter-wordpress-server --link dexter-mysql-server:mysql -p 0.0.0.0:80:80 -v "$PWD/html":/var/www/html -d wordpress
+~$ sudo docker container ls
+```
+
+###### Opções do comando "docker run":
+
+- **-p** - Significa **"publish"** - Permite mapear uma porta do container no host hospedeiro;
+- **-e** - Define variáveis de ambiente. Na execução do comando anterior;
+- **--link** - Define um link entre contêineres mapeando o nome e a imagem do contêiner;
+- **-v** - Cria um mapeamento de volumes no Docker. Em nosso exemplo, estamos mapeando o diretório; **banco** para armazenar dados do MYSQL salvos no  diretório **/var/lib/mysql** do contêiner. Para os arquivos do servidor web, mapeamos o diretório; **html** para armazenar dados salvos pelo Wordpress no diretório **/var/www/html** do contêiner.
+
+
+Depois de executar os contêineres, basta acessar o endereço da nossa virtual machine (no meu caso, 172.16.100.105) num browser. O wordpress deverá estar funcionando.
+
 
 
 #### Aula X.3 Configuração do Sudo
