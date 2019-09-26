@@ -213,9 +213,9 @@ Após executar o contêiner do MySQL, vamos executar o contêiner do Wordpress:
 - **--link** - Define um link entre contêineres mapeando o nome e a imagem do contêiner;
 - **-v** - Cria um mapeamento de volumes no Docker. Em nosso exemplo, estamos mapeando o diretório; **banco** para armazenar dados do MYSQL salvos no  diretório **/var/lib/mysql** do contêiner. Para os arquivos do servidor web, mapeamos o diretório; **html** para armazenar dados salvos pelo Wordpress no diretório **/var/www/html** do contêiner.
 
-
 Depois de executar os contêineres, basta acessar o endereço da nossa virtual machine (no meu caso, 172.16.100.105) num browser. O wordpress deverá estar funcionando.
 
+![](assets/Aula_6-f6672c8e.png)
 
 
-#### Aula X.3 Configuração do Sudo
+#### Aula X.3 Introdução ao Vagrant
