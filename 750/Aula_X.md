@@ -220,6 +220,35 @@ Depois de executar os contêineres, basta acessar o endereço da nossa virtual m
 
 #### Aula X.3 Introdução ao Vagrant
 
+- Solução de código aberto para construção e manutenção de ambientes de desenvolvimento;
+- Poder ser utilizado em conjunto com VirtualBox, VMWare e AWS;
+- Auxilia no aumento de produtividade do desenvolvimento.
+
+###### Quem utiliza o Vagrant?
+
+- **Desenvolvedores**: Caso você seja um desenvolvedor, o Vagrant será capaz de isolar as dependências e suas configurações em um único ambiente descartável e consistente, sem sacrificar nenhuma das ferramentas com as quais vocês está habituado (editores, navegadores, depuradores, etc);
+
+- **Operadores**: Se você é engenheiro de operações ou engenheiro de DevOps, o Vagrant é capaz de provisionar um ambiente descartável e um fluxo de trabalho confiável para desenvolver e testar scripts de gerenciamento de infraestrutura;
+
+- **Designers**: Caso você seja um designer, o Vagrant será capaz de configurar automaticamente tudo que é necessário para o aplicativo da web, para que você possa se concentrar apenas em realizar o design do seu app/site. Pois uma vez configurado o Vagrant, não é mais necessário se preocupar em como conseguir que o aplicativo seja executado novamente.
+
+##### Fluxo de trabalho
+
+![](assets/Aula_6-68386730.png)
+
+O Vagrant pode trabalhar com muitas tecnologias de virtualização, como VMWare, VirtualBox, Docker, AWS, etc.
+
+O usuário final (designer, engenheiro ou desenvolvedor) precisará simplesmente acionar o comando **"vagrant up"**. Feito isso, o Vagrant realizará a leitura do **Vagrantfile** no diretório corrente e em seguida realizar as operações de virtualização (operações baseadas nas configurações definidas no **Vagrantfile**).
+
+
+##### Instalação do Vagrant
+
+Abaixo está o link que direciona para a página de download dos pacotes de instalação do Vagrant.
+
+https://www.vagrantup.com/downloads.html
+
+
+Hora de praticar.
 
 Ao acessar a maquina Docker com o usuário suporte, vamos remover os contêineres em execução:
 
@@ -242,3 +271,104 @@ Para criar uma configuração inicial do vagrant, utilizamos o subcomando **init
 ###### Descrição do comandos
 
 - **vagrant init** - Cria um arquivo **Vagrantfile** com as configurações do box que você informou no [box-name], caso você não tenha a box correspondente adicionada na máquina, é mandatório adicionar o [box-url] para que ele possa baixá-lo.
+
+
+Vamos verificar se o Vagrantfile, responsável por definir as configurações do ambiente que vamos provisionar, está presente no diretório:
+
+```bash
+~$ cat Vagrantfile
+```
+
+Vamos substituir o arquivo Vagrantfile pelo arquivo de exemplo, que está configurado para utilizar o docker como provider:
+
+```bash
+~$ cp /opt/4450/Vagrantfile .
+~$ cat Vagrantfile
+```
+
+###### Modelo do arquivo Vagrantfile
+
+```bash
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+Vagrant.configure(2) do |config|
+ config.ssh.username = "root"
+ config.ssh.password = "4linux"
+ config.ssh.port = "2222"
+ config.vm.hostname = "docker-ssh"
+ config.vm.provider "docker" do |d|
+  d.image = "docker-ssh"
+  d.remains_running = false
+  d.has_ssh = true
+ end
+end
+```
+
+Após copiar o arquivo de modelo, vamos checar como está o status da máquina do Vagrant que vamos provisionar:
+
+```bash
+~$ sudo vagrant status default
+```
+
+Em seguida, vamos iniciar a máquina utilizando o subcomando **up <machine>**:
+
+```bash
+~$ sudo vagrant up default
+~$ sudo vagrant status default
+```
+
+###### Descrição dos comandos
+
+- **vagrant status <nome_da_instancia>** - Informa o status atual da instância;
+- **vagrant up** - Cria e inicia a instância baseando-se no arquivo Vagrantfile presente no diretório.
+
+
+Vamos checar (a partir de comandos do Docker) se o contêiner provisionado pelo Vagrant está em execução:
+
+```bash
+~$ sudo docker ps -a
+```
+
+Vamos parar a execução da máquina no Vagrant e em seguida checar o seu status:
+
+```bash
+~$ sudo vagrant halt default
+~$ sudo vagrant status default
+```
+
+Vamos iniciar novamente a máquina a partir do subcomando **up**
+
+```bash
+~$ sudo vagrant up default
+```
+
+###### Descrição do comando
+
+- **vagrant halt** - Envia um comando para desligar a instância ativa, encerrando todos os processos antes de finalizá-la.
+
+
+A partir do Vagrant, também podemos acessar as instâncias que criamos, para isso, podemos utilizar o protocolo ssh:
+
+```bash
+~$ sudo vagrant ssh default
+```
+
+Vamos verificar as informações da máquina do Vagrant:
+```bash
+~$ ip a
+~$ ps aux
+~$ exit
+```
+
+Para remover a instância que criamos no vagrant, podemos utilizar o subcomando **destroy**:
+```bash
+~$ sudo vagrant destroy default
+```
+
+###### Descrição do comando
+
+- **vagrant ssh** - Acessa via ssh a instância criada a partir do Vagrant;
+- **vagrant destroy** - Destrói a instância ativa no Vagrant.
+
+
+#### LAB GAMIFICATION
