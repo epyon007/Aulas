@@ -14,8 +14,9 @@ A definição de "nuvem" existe exatamente pelo fato de que uma vez conectado a 
 ![](assets/Aula_6-dc014e06.png)
 
 ##### IaaS
+**Infraestructure  as a Service / Infraestrutura como serviço**
 
-![](assets/Aula_6-78106626.png)
+Em serviços de Cloud Computing, o mais comum de se ver é um faturamento baseado no tempo de uso das soluções, onde o valor do serviço aumenta em função do tempo de utilização. Plataformas IaaS não fogem a este padrão.
 
 Neste modelo, está ao alcance do usuário um conjunto de infraestruturas de recursos de hardware, como:
 
@@ -27,6 +28,34 @@ Neste modelo, está ao alcance do usuário um conjunto de infraestruturas de rec
 ##### Exemplo de IaaS
 Podemos utilizar como exemplo de IaaS serviços como AWS, Google Cloud Platform, Digital Ocean, etc.
 
+
+##### PaaS
+
+**Platform as a Service / Plataformas como serviço**
+
+São utilizadas para criar softwares através de ferramentas interativas e flexíveis.
+
+A partir deste tipo de plataforma, é capaz desenvolver programas de acordo com diversas linguagens e frameworks disponíveis no mercado. Desta forma os programas são criados de maneira personalizada e adaptadas as necessidades dos usuários.
+
+##### Exemplo de PaaS
+
+Podemos utilizar como exemplo de PaaS serviços como Google App Engine, Microsoft Windows Azure, etc.
+
+##### SaaS
+
+**Software as a Service / Software(Aplicativo) como Serviço**
+
+Podemos dizer que é o modelo mais conhecido de serviço em cloud. O software é utilizado diretamente na nuvem, não sendo necessário pagamento de licenças para a sua utilização.
+
+
+##### Exemplo de SaaS
+
+Um exemplo perfeito de SaaS utilizado atualmente são serviços de sincronização de arquivos, como DropBox, Google Drive, etc.
+
+Neste exemplo, a única coisa com a qual o usuário precisa ter alguma preocupação é reservar o espaço em disco necessário para realizar a sincronização com a nuvem.
+
+Sendo assim, o usuário não precisa se preocupar com qualquer infraestrutura de TI utilizada para prover este SaaS, o que é muito mais cômodo.
+
 ![](assets/Aula_6-eb435749.png)
 
 Definir vantagens e desvantagens no uso de cloud computing é bastante relativo. Pois cada infraestrutura empresarial possui uma particularidade e por muitas vezes uma solução útil e econômica para uma corporação, pode acabar não sendo tão interessante para outra.
@@ -36,6 +65,7 @@ Apesar disso, podemos listar alguns motivos que podem justificar o uso de cloud 
 - **Substituir gasto em ativos de TI por gastos variáveis**:
 
 No lugar de realizar grandes investimentos em datacenters e servidores antes de saber ao certo como será sua utilização, as corporações podem utilizar a computação em nuvem para pagar apenas efetivamente o que elas consomem.
+
 
 - **Economias massivas de escala**:
 
