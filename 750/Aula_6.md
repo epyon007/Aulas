@@ -463,6 +463,101 @@ O IPv6 usa endereços de 128 bits permitindo aproximadamente 3,4*(10^38) de ende
 Os 64 bits que representam a rede podem ter diferentes significados e formatações diferentes dependendo do tipo de endereço que ele representa. O IPv6 assim como o IPv4 permite a criação de sub-redes como veremos mais a frente.
 Os bits iniciais de um endereço determinam o tipo de endereço IPv6, esses bits são conhecidos como Format Prefix(FP). Os endereços de multicast possuem um FP com oito bits de valor de um e difere dos endereços unicast. Já os endereços unicast não possuem diferença sintática com os endereços anycast que são derivados do primeiro. Veremos mais um pouco sobre esses endereços:
 
-- **Unicast — Os endereços unicast possuem escopo definido que pode ser global, local único elink local. Uma interface IPv6 pode ter vários endereços associados com ele e sempre tem umendereço link local;
-- Anycast — É um identificador para um grupo de interfaces, o pacote enviado para um endereço anycast é entregado para a interface mais próxima;
-- Multicast — Também é um identificador para um grupo de interfaces, mas o pacote é entregue para todas as interfaces identificadas pelo endereço.
+- **Unicast** — Os endereços unicast possuem escopo definido que pode ser global, local único elink local. Uma interface IPv6 pode ter vários endereços associados com ele e sempre tem umendereço link local;
+- **Anycast** — É um identificador para um grupo de interfaces, o pacote enviado para um endereço anycast é entregado para a interface mais próxima;
+- **Multicast** — Também é um identificador para um grupo de interfaces, mas o pacote é entregue para todas as interfaces identificadas pelo endereço.
+
+![](assets/Aula_6-ae5eaed6.png)
+
+##### Possibilidades do IPv6
+
+Vamos acessar a máquina **Storage**, vamos logar com o usuário **suporte** e vamos realizar a instalação do pacote **bc**:
+
+```bash
+~$ sudo yum install bc
+```
+Partindo do fato que o **IPv4** é composto por **32 bits**, ele gera aproximadamente **4 bilhões** de endereços:
+
+```bash
+echo "2 ^ 32" | bc
+```
+
+No caso do **IPv6**, formado por **128 bits**, é capaz de disponibilizar 340 undecilhões de endereços:
+
+```bash
+echo "2 ^ 128" | bc
+```
+
+###### Descrição dos comandos
+- **bc** - Busca para a maioria dos cálculos numéricos que podem ser necessários. No estudo de redes, podemos contar com uma simples calculadora de linha de comando chamada **bc**.
+
+
+###### Testando a conectividade do endereço IPv6
+
+Um endereço IPv6 é representado por 8 blocos de 16 bits, cada bloco é separado pelo caractere dois pontos (**:**), para isso vamos acessar a máquina **Storage**;
+
+```bash
+~$ sudo ip -6 addr show dev enp0s3 | grep inet6
+~$ sudo ip -6 addr show dev enp0s8 | grep inet6
+```
+
+Para testarmos a conectividade com o endereço IPv6 local, vamos utilizar o comando **ping6**:
+```bash
+~$ ping6 -I enp0s3 fe80::....
+```
+
+Vamos testar a conectividade com o endereço IPv6 no loopback, vamos utilizar o comando:
+```bash
+~$ ping6 -I lo ::1
+```
+
+####### Descrição dos comandos
+- **ping6** — Este comando utiliza o datagrama Echo Request (ping) do protocolo ICMP para testar a conectividade entre equipamentos;
+  - **-I** - Define o nome da interface.
+
+
+Agora vamos logar na máquina **Security** com o usuário **suporte** e vamos verificar as informações de endereçamento IPv6:
+
+```bash
+~$ sudo ip -6 addr show dev enp0s8 | grep inet6
+```
+
+Para testar conectividade com o endereço IPv6 local, vamos utilizar o comando **ping6**:
+
+
+```bash
+~$ ping6 -I enp0s8 fe80::....
+```
+
+Vamos testar a conectividade remota, pingando o endereço IPv6 da máquina **Storage**:
+
+```bash
+~$ ping6 -I enp0s8 fe80::....
+```
+
+###### Endereços IPv6
+
+Busca Um endereço IPv6 é representado por 8 blocos de 16 bits, cada bloco separado pelo caractere dois pontos (:):
+Cada grupo de 16 bits (duocteto) possui 4 símbolos hexadecimais que podem variar de **0000** a **FFFF**.
+Blocos vazios contínuos podem ser representados pelos caracteres **::** (quatro pontos) uma única vez dentro do endereço.
+Assim, o endereço de loopback: **0000:0000:0000:0000:0000:0000:0000:0001** pode ser representado dessa forma: **::1**
+
+
+Para realizar o ping6 em todos os hosts disponíveis, vamos executar o comando:
+
+```bash
+~$ ping6 -I enp0s8 ff02::1
+```
+
+##### Lab Gamification 6
+
+- 1 - Mostrar somente informações da interface enp0s8 sem uso do comando ip.
+- 2 - Adicionar interface virtual enp0s8:0 com o endereço 192.168.200.100.
+- 3 - Enviar 4 Echo Request com o ping para o endereço 192.168.200.100.
+- 4 - Visualizar em qual velocidade a interface enp0s3 está trafegando dados.
+- 5 - Mostre a tabela de rotas através do comando ip.
+- 6 - Configure no arquivo correto o ip 8.8.8.8 como resolvedor de nomes.
+- 7 - Trocar na sessão o nome do host para lab2-gamification.4linux.com.br.
+- 8 - Configure no arquivo correto a resolução do ip 192.168.200.100 para lab2-gamification.
+- 9 - Configure de forma estática no arquivo ifcfg-enp0s8:0 o ip 192.168.200.100.
+- 10 - Enviar 4 Echo Request para o endereço IPv6 no loopback.
