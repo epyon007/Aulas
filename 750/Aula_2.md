@@ -424,8 +424,6 @@ Para excluir uma variável é necessário utilizar o comando **unset** *[nome da
 ~ echo $CURSO
 ```
 
-# <!VALIDAR>
-
 Todo software que é executado no Linux precisa de várias informações para que possa funcionar corretamente: nome de usuário, tamanho do terminal, tipo do terminal, localização do executável, localização de alguma biblioteca, etc.
 
 Sem este tipo de informação não é possível utilizar o sistema de modo produtivo já que seria necessário passar tais informações a cada programa que for usar – e todas as vezes que for usar o mesmo programa.
@@ -445,8 +443,6 @@ Se não existisse uma variável de ambiente chamada PATH você teria que digitar
 
 Visualizar o conteúdo de uma variável:
 echo $PATH
-
-# <>
 
 Vamos ver na prática as variáveis **HOME**, **USER**, **PATH**, **PWD**, **SHELL** E **EDITOR**, vamos digitar os comandos abaixo no terminal:
 
