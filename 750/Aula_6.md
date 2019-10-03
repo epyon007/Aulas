@@ -7,10 +7,10 @@
 - **"Endereço IP"**: Identificação única de um computador na rede em que ele se encontra;
 - **"Máscara de rede"**: Parâmetro que determina a quantidade de hosts que a rede pode ter;
 
-####### Classes de endereçamento IP
-  - Classe A = 255.0.0.0 (/8);
-  - Classe B = 255.255.0.0 (/16);
-  - Classe C = 255.255.255.0 (/24);
+###### Classes de endereçamento IP
+  - **Classe A** = 255.0.0.0 (/8);
+  - **Classe B** = 255.255.0.0 (/16);
+  - **Classe C** = 255.255.255.0 (/24);
 
 - **"Rede/Network"**: O endereço de rede propriamente dito, também conhecido como network, é sempre o primeiro IP da rede;
 - **"Broadcast"**: Também é um endereço IP (mas é sempre o último possível dentro da rede ou subrede), permite que a informação seja enviada para todas as máquinas;
