@@ -221,7 +221,7 @@ Após acessar o arquivo, dentro do Modo de Comando temos alguns comandos que pod
 - **:syntax off** - Desabilita o uso de cores dentro do VIM;
 - **:syntax on** - Habilita o uso de cores dentro do VIM, facilitando a leitura;
 - **! ls /etc** - Executa um comando do shell estando dentro do arquivo de texto;
-- **r ls /etc** - Executa um comando do shell estando dentro do arquivo e redireciona a saída deste comando para dentro do arquivo.
+- **r! ls /etc** - Executa um comando do shell estando dentro do arquivo e redireciona a saída deste comando para dentro do arquivo.
 
 #### Outras Opções
 
