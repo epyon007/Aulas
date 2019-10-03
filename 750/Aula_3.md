@@ -178,8 +178,8 @@ Depois de instalado, vamos testar o funcionamento da ferramenta redirecionando a
 
 ###### Descrição dos comandos
 
-- **apt search** — Busca pacotes relacionados a palavra-chave definida pelo usuário. O mesmo resultado por ser obtido pelo comando **apt-cache search**.
-- **apt show** — Mostra informações detalhadas de um pacote. O mesmo resultado por ser obtido pelo comando **apt-cache show**.
+- **apt search** — Busca pacotes relacionados a palavra-chave definida pelo usuário. O mesmo resultado por ser obtido pelo comando **apt-cache search**;
+- **apt show** — Mostra informações detalhadas de um pacote. O mesmo resultado por ser obtido pelo comando **apt-cache show**;
 - **apt install** — Realiza a instalação de um pacote.
 
 Após checar o funcionamento da ferramenta ccze, vamos removê-la do nosso sistema e em seguida checar se ela realmente foi desinstalada.
@@ -190,6 +190,7 @@ Após checar o funcionamento da ferramenta ccze, vamos removê-la do nosso siste
 ```
 
 Podemos notar que apesar de desinstalarmos o pacote, ainda fica algo da instalação presente no sistema, para remover totalmente os dados é necessário utilizar a opção **--purge**:
+
 ```bash
 ~ sudo apt remove --purge ccze
 ~ dpkg -l | grep ccze
@@ -231,8 +232,8 @@ Em seguida, vamos pesquisar e checar as informações relacionadas ao pacote "li
 ```
 
 ##### Descrição dos comandos
- - yum repolist — Valida quais repositórios estão sendo usados.
- - yum search — Busca pacotes relacionados a palavra-chave.
+ - yum repolist — Valida quais repositórios estão sendo usados;
+ - yum search — Busca pacotes relacionados a palavra-chave;
  - yum info — Mostra informações detalhadas de um pacote.
 
 Depois de checadas as informações, podemos realizar a instalação do pacote e em seguida vamos testá-lo:
@@ -253,7 +254,7 @@ Após realizar a remoção com o yum, vamos checar se realmente o pacote foi rem
 ~ sudo rpm -qa | grep linux logo
 ```
 ##### Descrição dos comandos
-- yum install — Instala um pacote.
+- yum install — Instala um pacote;
 - yum remove — Remove um pacotes e suas dependências.
 
 ##### Funcionalidades Avançadas
@@ -283,7 +284,6 @@ Vamos começar verificando as opções do comando **dpkg** com a opção **--hel
 ~ sudo dpkg --help
 ```
 
-
 Após veriicar as opções disponíveis com o comando anterior, vamos utilizar a opção **-l** para listar os pacotes instalados na máquina atualmente.
 
 ```bash
@@ -300,7 +300,6 @@ Vamos verificar o status do pacote **bash** instalado, utilizando a opção **-s
 
 ##### Opções do comando dpkg
 
-#<! VALIDAR dpkg --help>
 - **-l** (list) — Lista todos os programas instalados;
 - **-s** (status) — Verifica o status de um programa instalado;
 - **-S** (search) — Busca o nome do programa que instalou determinado comando, arquivo ou biblioteca;
@@ -331,7 +330,7 @@ Após ter checado as informações referentes ao pacote, basta utilizarmos o com
 
 
 ##### Removendo programas desnecessários nos servidores
-- **-r** - Remove um programa sem suas dependências. Remoção Parcial;
+- **-r** - Remove um programa sem suas dependências. Remoção Parcial.
 
 ```bash
 $ sudo dpkg -l | less
@@ -364,7 +363,7 @@ Para listar todos os programas instalados, utilizamos a opção **-qa**:
 ~ sudo rpm -qa | grep bash
 ```
 
-Para verificarmos o status de um programa que já está instalado, utilizamos a opção **-qi**.
+Para verificarmos o status de um programa que já está instalado, utilizamos a opção **-qi**:
 
 ```bash
 ~ sudo rpm -qi bash
@@ -405,7 +404,6 @@ Após checarmos as informações necessárias, podemos realizar a instalação d
 ##### Removendo programas desnecessários nos servidores:
 
 
-## <! VALIDAR> Incluir descrições dos arquivos.
 ```bash
 $ sudo rpm -ql htop
 $ sudo rpm -qa | less
@@ -450,7 +448,7 @@ Após realizar a conversão do arquivo, vamos realizar a cópia do arquivo conve
 
 ###### Opções do comando alien
 
-- **-r** — Converte um pacote .Deb em um pacote .RPM da Red Hat.
+- **-r** — Converte um pacote .Deb em um pacote .RPM da Red Hat;
 - **--scripts** — Inclui scripts no pacote.
 
 
@@ -474,10 +472,13 @@ Em seguida basta salvar e sair do arquivo aberto.
 
 Após editar o arquivo, vamos realizar a instalação dele a partir do comando **rpm**.
 
-# <! Validar a opção -U e h do rpm>
 ```bash
 ~ sudo rpm -Uvh /root/rpmbuild/RPMS/x86_64/dateutils*.rpm
 ```
+
+- O parâmetro **"-U"** é utilizado para realizar a atualização de um pacote que já foi instalado anteriormente.
+- O parâmetro **"-v"** é utilizado para exibir o progresso da execução do comando;
+- O parâmetro **"-h"** imprime marcas de hash **"\#"** para exibir o progresso da execução do comando, geralmente é utilizado com o **"-v"** para melhor visualização.
 
 Após realizar a instalação, vamos checar se o pacote **dateutils** está presente no sistema.
 
@@ -581,14 +582,14 @@ Em seguida, vamos acessar o diretório onde será realizada  a compilação para
 ```
 
 ###### Descrição dos comandos
-- **tar** — Compacta e extrai arquivos de um arquivo de fita ou disco.
+- **tar** — Compacta e extrai arquivos de um arquivo de fita ou disco;
 - **less** — Permite fazer a paginação de arquivos ou da entrada padrão.
 
 ###### Opções do comando tar
-- **-x** — Extrai arquivos de um arquivo.
+- **-x** — Extrai arquivos de um arquivo;
 - **-f** — Define o nome do arquivo.
 
-Para realizar uma verificação do sistema, vamos executar o script **configure**.
+Para realizar uma verificação do sistema, vamos executar o script **configure**:
 
 ```bash
 ~ ./configure
@@ -626,7 +627,6 @@ Quando isso ocorrer, deve-se identificar o componente que está faltando, instal
 
 ##### Compilando aplicação NTOPNG
 
-# <! Pesquisar o que é NTOPNG >
 - **NTOPNG** - É uma ferramenta de análise de rede. Gera gráficos de monitoramento das interface de rede, observando diversos protocolos.
 
   - Dependências:
@@ -642,7 +642,7 @@ Vamos precisar estar logados como usuário root, precisamos instalar o grupo de 
 ~ yum groupinstall "Development tools"
 ```
 
-Após instalar o pacote anterior, precisaremos fazer o download do código fonte da aplicação nDPI, através do comando *git*:
+Após instalar o pacote anterior, precisaremos fazer o download do código fonte da aplicação nDPI, através do comando ***git***:
 
 ```bash
 ~ git clone https://github.com/ntop/nDPI.git
@@ -659,7 +659,7 @@ Após realizado o download, vamos acessar o diretório da aplicação e executar
 #### Instalação
 
 Ao compilarmos um programa a partir de seu código fonte, é muito comum que alguns de seus requisitos não estejam presentes, ocasionando assim erros durante a execução do **configure**.
-Quando isso ocorrer, devemos identificar o componente que está causand a falha, instalá-lo e executar novamente o **configure** até que ele termine com sucesso.
+Quando isso ocorrer, devemos identificar o componente que está causando a falha, instalá-lo e executar novamente o **configure** até que ele termine com sucesso.
 
 Para resolver o problema de dependências, vamos precisar instalar o pacote a seguir:
 
@@ -771,13 +771,13 @@ Pronto, está concluída a compilação do **ntopng**.
 
 ### LAB GAMIFICATION 3
 
-1 - Instalar o pacote alien.
-2 - Remover o pacote ntpdate.
-3 - Usar o comando para encontrar o pacote rpm que possui o arquivo /etc/passwd .
-4 - Usar o comando para listar os arquivos de documentação do pacote openssh.
-5 - Verificar somente se o pacote openssh esta instalado
-6 - Exibir informações do pacote /opt/pacotes/htop.rpm.
-7 - Exibir dependencias do pacote /opt/pacotes/htop.rpm
-8 - Converter o pacote sl_3.03-17+b2_amd64.deb para RPM estando na pasta /opt/pacotes .
-9 - Através do comando gcc verificar sua versão.
-10 - Através do comando make listar as opções.
+- 1 - Instalar o pacote alien.
+- 2 - Remover o pacote ntpdate.
+- 3 - Usar o comando para encontrar o pacote rpm que possui o arquivo /etc/passwd .
+- 4 - Usar o comando para listar os arquivos de documentação do pacote openssh.
+- 5 - Verificar somente se o pacote openssh esta instalado
+- 6 - Exibir informações do pacote /opt/pacotes/htop.rpm.
+- 7 - Exibir dependencias do pacote /opt/pacotes/htop.rpm
+- 8 - Converter o pacote sl_3.03-17+b2_amd64.deb para RPM estando na pasta /opt/pacotes .
+- 9 - Através do comando gcc verificar sua versão.
+- 10 - Através do comando make listar as opções.
