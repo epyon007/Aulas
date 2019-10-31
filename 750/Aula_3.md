@@ -769,7 +769,7 @@ Após concluir a troca de senha, você acessará o dashboard da aplicação.
 Pronto, está concluída a compilação do **ntopng**.
 
 
-### LAB GAMIFICATION 3
+<!-- ### LAB GAMIFICATION 3
 
 - 1 - Instalar o pacote alien.
 - 2 - Remover o pacote ntpdate.
@@ -780,4 +780,4 @@ Pronto, está concluída a compilação do **ntopng**.
 - 7 - Exibir dependencias do pacote /opt/pacotes/htop.rpm
 - 8 - Converter o pacote sl_3.03-17+b2_amd64.deb para RPM estando na pasta /opt/pacotes .
 - 9 - Através do comando gcc verificar sua versão.
-- 10 - Através do comando make listar as opções.
+- 10 - Através do comando make listar as opções. -->

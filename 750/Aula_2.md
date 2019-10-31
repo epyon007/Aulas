@@ -693,7 +693,7 @@ Nos comandos a seguir, vamos buscar informações das timezones das cidades do C
 ```
 
 
-### LAB GAMIFICATION 2
+<!-- ### LAB GAMIFICATION 2
 
 - 1 - Abrir de forma vertical no editor VIM os arquivos /etc/passwd e /etc/fstab;
 - 2 - Utilizar o editor VIM para abrir o arquivo /etc/group na última linha;
@@ -704,4 +704,4 @@ Nos comandos a seguir, vamos buscar informações das timezones das cidades do C
 - 7 - Definir o comando para limpar a tela no logout da sessão;
 - 8 - Definir o comando para mostrar o calendário no login da sessão;
 - 9 - Criar o apelido linuxcommand para o comando cal no arquivo .bashrc;
-- 10 - Executar o comando para listar as timezones disponíveis.
+- 10 - Executar o comando para listar as timezones disponíveis. -->

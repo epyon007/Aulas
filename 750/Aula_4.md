@@ -225,14 +225,14 @@ Em seguida vamos criar pastas para armazenar os dados do wordpress e mysql:
 Depois de criar os diretórios para armazenar os dados, vamos executar um contêiner e em seguida checar se ele está em execução:
 
 ```bash
-~$ sudo docker container run -e MYSQL_ROOT_PASSWORD=4linux -e MYSQL_DATABASE=wordpress --name dexter-mysql-server -v "$PWD/banco":/var/lib/mysql -d mysql:5.7.22
+~$ sudo docker container run -e MYSQL_ROOT_PASSWORD=trylinux -e MYSQL_DATABASE=wordpress --name dexter-mysql-server -v "$PWD/banco":/var/lib/mysql -d mysql:5.7.22
 ~$ sudo docker container ls
 ```
 
 Após executar o contêiner do MySQL, vamos executar o contêiner do Wordpress:
 
 ```bash
-~$ sudo docker container run -e WORDPRESS_DB_PASSWORD=4linux --name dexter-wordpress-server --link dexter-mysql-server:mysql -p 0.0.0.0:80:80 -v "$PWD/html":/var/www/html -d wordpress
+~$ sudo docker container run -e WORDPRESS_DB_PASSWORD=trylinux --name dexter-wordpress-server --link dexter-mysql-server:mysql -p 0.0.0.0:80:80 -v "$PWD/html":/var/www/html -d wordpress
 ~$ sudo docker container ls
 ```
 
@@ -323,7 +323,7 @@ Vamos substituir o arquivo Vagrantfile pelo arquivo de exemplo, que está config
 # vi: set ft=ruby :
 Vagrant.configure(2) do |config|
  config.ssh.username = "root"
- config.ssh.password = "4linux"
+ config.ssh.password = "trylinux"
  config.ssh.port = "2222"
  config.vm.hostname = "docker-ssh"
  config.vm.provider "docker" do |d|
@@ -401,4 +401,4 @@ Para remover a instância que criamos no vagrant, podemos utilizar o subcomando 
 - **vagrant destroy** - Destrói a instância ativa no Vagrant.
 
 
-#### LAB GAMIFICATION
+<!-- #### LAB GAMIFICATION -->

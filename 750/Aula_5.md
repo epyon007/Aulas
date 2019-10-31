@@ -24,7 +24,7 @@ Armazenar em /srv/dexter/
 
 - **Padrão de Nome de Usuários:**
 Login do Usuário: nome.sobrenome
-Senha Padrão: 4linux
+Senha Padrão: trylinux
 
 
 
@@ -323,17 +323,17 @@ Ainda na máquina **Storage**, vamos alternar para o usuário **root** e vamos v
 ```bash
 #!/bin/bash
 adduser --home /srv/homes/casey.milo casey.milo
-echo 'casey.milo:4linux' | chpasswd
+echo 'casey.milo:trylinux' | chpasswd
 adduser --home /srv/homes/annie.dee annie.dee
-echo 'annie.dee:4linux' | chpasswd
+echo 'annie.dee:trylinux' | chpasswd
 adduser --home /srv/homes/grace.kenny grace.kenny
-echo 'grace.kenny:4linux' | chpasswd
+echo 'grace.kenny:trylinux' | chpasswd
 adduser --home /srv/homes/antony.brooks antony.brooks
-echo 'antony.brooks:4linux' | chpasswd
+echo 'antony.brooks:trylinux' | chpasswd
 adduser --home /srv/homes/fox.bennett fox.bennett
-echo 'fox.bennett:4linux' | chpasswd
+echo 'fox.bennett:trylinux' | chpasswd
 adduser --home /srv/homes/harry.rosemberg harry.rosemberg
-echo 'harry.rosemberg:4linux' | chpasswd
+echo 'harry.rosemberg:trylinux' | chpasswd
 ```
 
 O comando **chpasswd** permite definir senha na linha de comando.
@@ -479,7 +479,7 @@ slide acima.
 ![](assets/Aula_5-22181b12.png)
 
 
-###### Testando as permissões no 4linux
+###### Testando as permissões no trylinux
 
 Vamos logar com o usuário fox.bennett (do grupo financeiro), e tentar acessar a pasta de outro departamento:
 
@@ -904,7 +904,7 @@ Vamos validar se a configuração aplicada surtiu efeito, vamos logar com o usu�
 ~ exit
 ```
 
-### LAB GAMIFICATION 5
+<!-- ### LAB GAMIFICATION 5
 
 1 - Adicionar o usuário devops.
 2 - Adicionar o grupo ti.
@@ -915,4 +915,4 @@ Vamos validar se a configuração aplicada surtiu efeito, vamos logar com o usu�
 7 - Executar o comando para trocar a senha do usuário devops.
 8 - Trocar o grupo do arquivo /opt/pacotes/htop.rpm
 9 - Trocar o usuário dono do arquivo /opt/pacotes/htop.rpm
-10 - Definir que o dono, grupo e outros possam ler e escrever o arquivo /opt/pacotes/htop.rpm
+10 - Definir que o dono, grupo e outros possam ler e escrever o arquivo /opt/pacotes/htop.rpm -->

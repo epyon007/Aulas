@@ -525,7 +525,7 @@ Após realizar a remoção das linhas comentadas e vazias, podemos utilizar tamb
 ```
 
 
-### LAB GAMIFICATION
+<!-- ### LAB GAMIFICATION
 
 - 1 - Exibir a versão de liberação do kernel.
 - 2 - Listar arquivos ocultos do diretório /etc.
@@ -536,4 +536,4 @@ Após realizar a remoção das linhas comentadas e vazias, podemos utilizar tamb
 - 7 - Usar o comando sed para exibir a quinta linha do arquivo /etc/passwd.
 - 8 - Usar o awk para filtrar a primeira coluna do arquivo /etc/passwd.
 - 9 - Encontrar todos os arquivos em /etc com o tamanho acima de 5000kbytes.
-- 10 - Encontre todos os arquivos PDF em /usr/share/doc e copiar para o /tmp.
+- 10 - Encontre todos os arquivos PDF em /usr/share/doc e copiar para o /tmp. -->

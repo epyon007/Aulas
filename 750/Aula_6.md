@@ -549,7 +549,7 @@ Para realizar o ping6 em todos os hosts disponíveis, vamos executar o comando:
 ~$ ping6 -I enp0s8 ff02::1
 ```
 
-##### Lab Gamification 6
+<!-- ##### Lab Gamification 6
 
 - 1 - Mostrar somente informações da interface enp0s8 sem uso do comando ip.
 - 2 - Adicionar interface virtual enp0s8:0 com o endereço 192.168.200.100.
@@ -560,4 +560,4 @@ Para realizar o ping6 em todos os hosts disponíveis, vamos executar o comando:
 - 7 - Trocar na sessão o nome do host para lab2-gamification.4linux.com.br.
 - 8 - Configure no arquivo correto a resolução do ip 192.168.200.100 para lab2-gamification.
 - 9 - Configure de forma estática no arquivo ifcfg-enp0s8:0 o ip 192.168.200.100.
-- 10 - Enviar 4 Echo Request para o endereço IPv6 no loopback.
+- 10 - Enviar 4 Echo Request para o endereço IPv6 no loopback. -->
