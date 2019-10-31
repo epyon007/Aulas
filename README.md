@@ -1,6 +1,6 @@
 # AULAS
 
-Neste repositório estou atualizando o material a ser utilizado em minha primeira instrução de curso na 4linux.
+Neste repositório estou atualizando o material a ser utilizado em minhas primeiras instruções de curso de Linux.
 
 Bora fazer funcionar e ver o resultado.
 
