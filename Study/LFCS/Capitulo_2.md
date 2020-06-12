@@ -14,24 +14,24 @@ A estrutura de pastas de sistemas Linux (UNIX-based) de maneira geral, consistem
 #### 2.7 Layout do Diretório Principal
 
 
-**Directory** | **In FHS?** | **Purpose**
+**Diretório** | **Faz parte do FHS?** | **Função**
 ------|------|------
-/   |	 Yes |	Primary directory of the entire file system hierarchy.
-/bin | 	Yes |	Essential executable programs that must be available in single user mode.
-/boot |	Yes |	Files needed to boot the system, such as the kernel, initrd or initramfs images, and boot configuration files and bootloader programs.
-/dev |	Yes |	Device Nodes, used to interact with hardware and software devices.
-/etc |	Yes |	System wide configuration files.
-/home |	Yes |	User home directories including personal settings, files, etc.
-/lib |	Yes |	Libraries required by executable binaries in /bin and /sbin.
-/lib64 |	No |	64-bit libraries required by executable binaries in /bin and /sbin, for systems which can run both 32-bit and 64-bit programs.
-/media |	Yes |	Mount points for removable media such as CDs, DVDs, USB sticks etc.
-/mnt |	Yes |	Temporarily mounted filesystems.
-/opt |	Yes |	Optional application software packages.
-/proc |	Yes |	Virtual pseudo-filesystem giving information about the system and processes running on it. Can be used to alter system parameters.
-/sys |	No |	Virtual pseudo-filesystem giving information about the system and processes running on it. Can be used to alter system parameters. Similar to a device tree and is part of the Unified Device Model.
-/root |	Yes |	Home directory for the root user.
-/sbin |	Yes | 	Essential system binaries.
-/srv |	Yes |	Site-specific data served up by the system. Seldom used.
-/tmp |	Yes | 	Temporary files; on many distributions lost across a reboot and may be a ramdisk in memory.
-/usr |	Yes |	Multi-user applications, utilities and data; theoretically read-only.
-/var |	Yes | 	Variable data that changes during system operation.
+/   |	 Sim |	Principal diretório dentro de toda a hierarquia do sistema de arquivos.
+/bin | 	Sim |	Programas executáveis essenciais que devem estar disponíveis no modo *single user*.
+/boot |	Sim |	Arquivos necessários para iniciar o sistema, como kernel(vmlinuz), initrd ou initramfs, assim como arquivos de configuração de boot e bootloaders.
+/dev |	Sim |	Utilizado na interação entre hardware e software.
+/etc |	Sim |	Arquivos de configuração do sistema.
+/home |	Sim |	Diretórios pessoais dos usuários incluindo configurações e arquivos pessoais, etc.
+/lib |	Sim |	Bibliotecas necessárias para executar binários presentes nos diretórios /bin e /sbin.
+/lib64 |	Não |	Bibliotecas 64bit necessárias para executar binários presentes nos diretórios /bin e /sbin. Para sistemas que podem rodar programas 32 bits e 64 bits.
+/media |	Sim |	Pontos de montagem para mídias removíveis como CDs, DVDs, Pen-Drives e HDs Externos etc.
+/mnt |	Sim |	Sistemas de arquivos montados temporariamente.
+/opt |	Sim |	Pacotes de software opcionais.
+/proc |	Sim |	Pseudo-filesystem virtual que fornece informações sobre o sistema e processos em execução. Pode ser utilizado para alterar parâmetros do sistema.
+/sys |	Não |	Segue o mesmo princípio do **/proc**.
+/root |	Sim |	Diretório pessoal do usuário **root**.
+/sbin |	Sim | Binários essenciais do sistema.
+/srv |	Sim |	Dados fornecidos pelo sistema. Raramente utilizado.
+/tmp |	Sim | 	Arquivos temporários; em muitas distribuições são perdidos durante o processo de reboot. Arquivos que podem ser executados em memória, e não no disco.
+/usr |	Sim |	Aplicações, utilitários e dados multi-usuários; comumente sendo somente leitura.
+/var |	Sim | 	Dados variáveis que mudam constantemente durante o funcionamento do sistema.
