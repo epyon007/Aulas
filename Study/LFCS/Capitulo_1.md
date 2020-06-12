@@ -1,6 +1,7 @@
 
 # Capitulo 1 - LFCS
 
+Introdução ao curso.
 ## Courses Resources
 
 - https://training.linuxfoundation.org/cm/LFS201
@@ -36,7 +37,7 @@ By the end of this chapter, you should be able to:
         Linux distributors spend a lot of time making sure their filesystem layout is coherent and evolves correctly over time. Below is a list of the main directories which are normally found under /:.
 
         ####TABELA
-        Directory 	In FHS? 	Purpose
+        Directory	In FHS? 	Purpose
         / 	 Yes 	Primary directory of the entire file system hierarchy.
         /bin 	Yes 	Essential executable programs that must be available in single user mode.
         /boot 	Yes 	Files needed to boot the system, such as the kernel, initrd or initramfs images, and boot configuration files and bootloader programs.
