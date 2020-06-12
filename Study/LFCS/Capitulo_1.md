@@ -1,7 +1,7 @@
 
-### Capitulo 1 - LFCS
+# Capitulo 1 - LFCS
 
-# Courses Resources
+## Courses Resources
 
 - https://training.linuxfoundation.org/cm/LFS201
 - Login: LFtraining
@@ -9,7 +9,7 @@
 
 # Capitulo 2
 
-FHS
+## FHS
 
 
 By the end of this chapter, you should be able to:
