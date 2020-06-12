@@ -1,12 +1,13 @@
 
-Capitulo 1 - LFCS
+### Capitulo 1 - LFCS
 
-Courses Resources
-https://training.linuxfoundation.org/cm/LFS201
-Login: LFtraining
-Password: Penguin2014
+# Courses Resources
 
-Capitulo 2
+- https://training.linuxfoundation.org/cm/LFS201
+- Login: LFtraining
+- Password: Penguin2014
+
+# Capitulo 2
 
 FHS
 
